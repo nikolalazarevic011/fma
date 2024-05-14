@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'fbe6ba': '#fbe6ba',
+      },
       fontFamily: {
         heading: ["Aboreto", "cursive"],
         body: ["Poppins", "sans-serif"],
