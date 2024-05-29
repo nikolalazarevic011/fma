@@ -8,7 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'fbe6ba': '#fbe6ba',
+        primary: '#002063',
+        secondary: '#fbe6ba',
+        primaryLight: '#248acc',
+        primaryDark: '#002b4e',
       },
       fontFamily: {
         heading: ["Aboreto", "cursive"],

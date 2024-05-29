@@ -4,8 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* @layer components {
     .btn {
         @apply inline-block my-2 px-4 py-2 uppercase rounded-md cursor-pointer font-bold text-fbe6ba border-2 border-fbe6ba bg-transparent ;
     }
-}
+} */

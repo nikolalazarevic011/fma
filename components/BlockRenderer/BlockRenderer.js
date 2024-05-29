@@ -1,9 +1,12 @@
 import { ButtonLink } from "components/ButtonLink";
 import { CallToActionButton } from "components/CallToActionButton";
+import { Column } from "components/Column";
+import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
 import { Paragraph } from "components/Paragraph";
 import Image from "next/image";
+import { theme } from "theme";
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
@@ -17,10 +20,6 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "core/image": {
         return (
-          // <div
-          //   key={block.id}
-          //   className="flex justify-center items-center"
-          // >
           <Image
             src={block.attributes.url}
             height={block.attributes.height}
@@ -28,7 +27,6 @@ export const BlockRenderer = ({ blocks }) => {
             alt={block.attributes.alt || ""}
             priority
           />
-          // </div>
         );
       }
       case "acf/acfimage": {
@@ -69,7 +67,7 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "core/cover": {
         return (
-          <Cover key={block.id} background={block.attributes.url}>
+          <Cover key={block.id} background={block.attributes.url} overlay={block.attributes.overlayColor}>
             <BlockRenderer blocks={block.innerBlocks} />
           </Cover>
         );
@@ -97,6 +95,44 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
+      case "core/columns": {
+        console.log("COLUMNS: ", block.attributes);
+        return (
+          <Columns
+            key={block.id}
+            isStackedOnMobile={block.attributes.isStackedOnMobile}
+            textColor={
+              theme[block.attributes.textColor] ||
+              block.attributes.style?.color?.text
+            }
+            backgroundColor={
+              theme[block.attributes.backgroundColor] ||
+              block.attributes.style?.color?.background
+            }
+          >
+            <BlockRenderer blocks={block.innerBlocks} />
+          </Columns>
+        );
+      }
+      case "core/column": {
+        console.log("COLUMNS: ", block.attributes);
+        return (
+          <Column
+            key={block.id}
+            width={block.attributes.width}
+            textColor={
+              theme[block.attributes.textColor] ||
+              block.attributes.style?.color?.text
+            }
+            backgroundColor={
+              theme[block.attributes.backgroundColor] ||
+              block.attributes.style?.color?.background
+            }
+          >
+            <BlockRenderer blocks={block.innerBlocks} />
+          </Column>
+        );
+      }
       case "acf/ctabutton": {
         return (
           <CallToActionButton
@@ -104,6 +140,7 @@ export const BlockRenderer = ({ blocks }) => {
             buttonLabel={block.attributes.data.label}
             destination={block.attributes.data.destination || "/"}
             align={block.attributes.data.align}
+            color={block.attributes.data.color}
           />
         );
       }
