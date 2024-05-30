@@ -21,3 +21,19 @@ export const getFontSizeForHeading = (level) => {
 
   return `${fontSizeMap[level] || ""}`;
 };
+
+export const getColorClass = (color = "primary") => {
+  const colorMap = {
+    primary: "text-primary",
+    secondary: "text-secondary",
+    primaryLight: "text-primaryLight",
+    primaryDark: "text-primaryDark",
+    white: "text-white",
+    black: "text-black",
+  };
+
+  return `${colorMap[color] || ""}`;
+};
+
+
+

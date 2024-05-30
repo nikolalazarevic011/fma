@@ -9,6 +9,10 @@ import Image from "next/image";
 import { theme } from "theme";
 
 export const BlockRenderer = ({ blocks }) => {
+  if (!Array.isArray(blocks)) {
+    // console.error('BlockRenderer error: `blocks` is not an array', blocks);
+    return null; // Or a fallback UI
+  }
   return blocks.map((block) => {
     switch (block.name) {
       //   case "core/list": {
@@ -62,6 +66,7 @@ export const BlockRenderer = ({ blocks }) => {
             level={block.attributes.level}
             textAlign={block.attributes.textAlign}
             content={block.attributes.content}
+            color={block.attributes.textColor}
           />
         );
       }
@@ -109,13 +114,15 @@ export const BlockRenderer = ({ blocks }) => {
               theme[block.attributes.backgroundColor] ||
               block.attributes.style?.color?.background
             }
+            marginTop={block.attributes.style?.spacing.margin.top} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
+            verticalAlignment={block.attributes.verticalAlignment}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Columns>
         );
       }
       case "core/column": {
-        console.log("COLUMNS: ", block.attributes);
+        // console.log("COLUMN: ", block.attributes);
         return (
           <Column
             key={block.id}
