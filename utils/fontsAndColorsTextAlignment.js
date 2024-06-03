@@ -30,10 +30,14 @@ export const getColorClass = (color = "primary") => {
     primaryDark: "text-primaryDark",
     white: "text-white",
     black: "text-black",
+    headingRed: "text-headingRed",
+    "var:preset|color|background": 'text-white'
   };
 
   return `${colorMap[color] || ""}`;
 };
+
+
 
 
 

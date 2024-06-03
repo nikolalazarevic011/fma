@@ -1,6 +1,7 @@
-import { IsNotMobile, useIsNotMobile } from "utils/useIsNotMobile";
-import { getSpacingClass } from "utils/spacingAndAlignment";
-import { getAlignmentClass } from "utils/spacingAndAlignment";
+import { useIsNotMobile } from "utils/useIsNotMobile";
+import {
+  getAlignmentClass,
+} from "utils/spacingAndAlignment";
 
 export const Columns = ({
   isStackedOnMobile,
@@ -10,14 +11,10 @@ export const Columns = ({
   marginTop,
   verticalAlignment,
 }) => {
-
-  const isNotMobile = useIsNotMobile()
+  const isNotMobile = useIsNotMobile();
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
   const marginTopClass = isNotMobile && marginTop ? { marginTop } : "";
-
-  // console.log(isNotMobile);
-
 
   return (
     <div

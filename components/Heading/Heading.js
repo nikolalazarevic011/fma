@@ -6,7 +6,7 @@ import {
 } from "utils/fontsAndColorsTextAlignment";
 
 export const Heading = ({ textAlign, content, level = 2, color }) => {
-  console.log(color);
+  // console.log(color);
   const textColor = color ? `text-[${color}]` : `text-primary`;
 
   const tag = React.createElement(`h${level}`, {
@@ -17,5 +17,3 @@ export const Heading = ({ textAlign, content, level = 2, color }) => {
   });
   return tag;
 };
-
-

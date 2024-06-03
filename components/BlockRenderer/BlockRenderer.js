@@ -5,6 +5,7 @@ import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
 import { Paragraph } from "components/Paragraph";
+import { AcfVideo } from "components/acfVideo";
 import Image from "next/image";
 import { theme } from "theme";
 
@@ -15,9 +16,6 @@ export const BlockRenderer = ({ blocks }) => {
   }
   return blocks.map((block) => {
     switch (block.name) {
-      //   case "core/list": {
-      //     return <div key={block.id}>core cover</div>;
-      //   }
       case "core/block": //ovako moze kad vracaju isto
       case "core/group": {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
@@ -72,7 +70,12 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "core/cover": {
         return (
-          <Cover key={block.id} background={block.attributes.url} overlay={block.attributes.overlayColor}>
+          <Cover
+            key={block.id}
+            background={block.attributes.url}
+            overlay={block.attributes.overlayColor}
+            contentSize={block.attributes.layout.contentSize}
+          >
             <BlockRenderer blocks={block.innerBlocks} />
           </Cover>
         );
@@ -91,7 +94,7 @@ export const BlockRenderer = ({ blocks }) => {
         return (
           <Paragraph
             key={block.id}
-            textAlign={block.attributes.align}
+            textAlign={block.attributes.textAlign}
             content={block.attributes.content}
             // textColor={
             //   theme[block.attributes.textColor] ||
@@ -114,8 +117,9 @@ export const BlockRenderer = ({ blocks }) => {
               theme[block.attributes.backgroundColor] ||
               block.attributes.style?.color?.background
             }
-            marginTop={block.attributes.style?.spacing.margin.top} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
+            marginTop={block.attributes.style?.spacing?.margin?.top} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
             verticalAlignment={block.attributes.verticalAlignment}
+            // spacing={block.attributes.style?.spacing} // kad napravis util klasu da samo paste spacing a ona odradi sve
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Columns>
@@ -135,6 +139,8 @@ export const BlockRenderer = ({ blocks }) => {
               theme[block.attributes.backgroundColor] ||
               block.attributes.style?.color?.background
             }
+            borderBottom={block.attributes.style?.border?.bottom?.width}
+            borderBottomColor={block.attributes.style?.border?.bottom?.color}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Column>
@@ -148,6 +154,14 @@ export const BlockRenderer = ({ blocks }) => {
             destination={block.attributes.data.destination || "/"}
             align={block.attributes.data.align}
             color={block.attributes.data.color}
+          />
+        );
+      }
+      case "acf/acfvideo": {
+        return (
+          <AcfVideo
+            key={block.id}
+            src={block.attributes.data.url}
           />
         );
       }
