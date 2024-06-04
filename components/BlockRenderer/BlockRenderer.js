@@ -74,7 +74,9 @@ export const BlockRenderer = ({ blocks }) => {
             key={block.id}
             background={block.attributes.url}
             overlay={block.attributes.overlayColor}
-            contentSize={block.attributes.layout.contentSize}
+            mobileHeight={block.attributes.layout.contentSize}
+            desktopHeight={block.attributes.layout.wideSize}
+            // desktopHeight={block.attributes.minHeight + 'px'}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Cover>

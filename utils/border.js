@@ -22,6 +22,9 @@ export const getBorderBottomWidthClass = (borderBottomWidth = "0px") => {
       black: "border-black",
       headingRed: "border-headingRed",
       "var:preset|color|background": "border-white",
+      "var:preset|color|primary": "border-primary",
+      "var:preset|color|secondary": "border-secondary",
+
     };
   
     return `${colorMap[color] || ""}`;

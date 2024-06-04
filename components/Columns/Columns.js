@@ -21,7 +21,7 @@ export const Columns = ({
       style={{ ...textColorStyle, ...backgroundColorStyle, ...marginTopClass }}
     >
       <div
-        className={`max-w-5xl mx-auto  ${
+        className={`max-w-7xl mx-auto  ${
           isStackedOnMobile ? "block md:flex" : "flex"
         } ${getAlignmentClass(verticalAlignment)} `}
       >
