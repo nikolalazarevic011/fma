@@ -9,3 +9,34 @@
         @apply inline-block my-2 px-4 py-2 uppercase rounded-md cursor-pointer font-bold text-fbe6ba border-2 border-fbe6ba bg-transparent ;
     }
 } */
+
+
+.swiper {
+    width: 100%;
+    height: 10rem;
+  }
+
+  @media (max-width: 468px) {
+    .swiper {
+        height: 5rem; /* Increased height for larger screens */
+    }
+}
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    /* display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; */
+  }
+  

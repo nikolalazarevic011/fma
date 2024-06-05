@@ -1,3 +1,4 @@
+import AcfSlider from "components/AcfSlider/AcfSlider";
 import { ButtonLink } from "components/ButtonLink";
 import { CallToActionButton } from "components/CallToActionButton";
 import { Column } from "components/Column";
@@ -35,7 +36,7 @@ export const BlockRenderer = ({ blocks }) => {
         return (
           <div
             key={block.id}
-            className={`flex justify-${block.attributes.data.align} mb-8 `}
+            className={`flex justify-${block.attributes.data.align} mb-8`}
           >
             <Image
               src={block.attributes.data.url}
@@ -160,12 +161,11 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/acfvideo": {
-        return (
-          <AcfVideo
-            key={block.id}
-            src={block.attributes.data.url}
-          />
-        );
+        return <AcfVideo key={block.id} src={block.attributes.data.url} />;
+      }
+      case "acf/acfslider": {
+        console.log(block.attributes.data);
+        return <AcfSlider key={block.id} images={block.attributes.data} />;
       }
       default: {
         console.log("UNKNOWN:", block);
