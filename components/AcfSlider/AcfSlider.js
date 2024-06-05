@@ -191,7 +191,7 @@
 
 //! so the pagnation is under the slider
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -212,8 +212,9 @@ const AcfSlider = ({ images }) => {
   }
 
   return (
-    <div className="mx-auto max-w-7xl py-8" >
+    <div className="mx-auto max-w-7xl py-8">
       <Swiper
+        navigation={true}
         slidesPerView={3}
         spaceBetween={30}
         loop={true}
@@ -224,11 +225,11 @@ const AcfSlider = ({ images }) => {
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination, Autoplay]}
+        modules={[Pagination, Autoplay, Navigation]}
         className="swiper" // Added padding-bottom here
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index} className="flex items-center justify-center">
+          <SwiperSlide key={index} className="flex items-center justify-center ml-3">
             <a href={slide.url} target="_blank" rel="noopener noreferrer">
               <Image
                 src={slide.image}
@@ -240,7 +241,6 @@ const AcfSlider = ({ images }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      
     </div>
   );
 };
