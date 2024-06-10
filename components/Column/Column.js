@@ -14,7 +14,7 @@ export const Column = ({ children, width, textColor, backgroundColor, borderBott
   return (
     <div
       style={{ ...widthStyle, ...textColorStyle, ...backgroundColorStyle }}
-      className={`px-2 pt-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderBottomColorClass(borderBottomColor)}`}
+      className={`px-2 pt-5 pb-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderBottomColorClass(borderBottomColor)}`}
     >
       {children}
     </div>
