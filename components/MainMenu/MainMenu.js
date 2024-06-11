@@ -16,12 +16,19 @@ export const MainMenu = ({ items }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm">
+    <header
+      className="bg-white shadow-sm"
+      style={{
+        backgroundImage: "url('/images/asset-3.jpeg')",
+        backgroundSize: "cover",
+        // backgroundPosition: "center",
+      }}
+    >
       <nav
         className="mx-auto max-w-full px-4 sm:px-6 lg:px-8"
         aria-label="Global"
       >
-        <div className="flex items-center justify-between py-6 md:justify-start md:space-x-5">
+        <div className="flex items-center justify-between py-3 sm:py-5 md:justify-start md:space-x-5">
           {/* LOGO */}
           {/* <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link legacyBehavior href="/" passHref>
@@ -42,7 +49,7 @@ export const MainMenu = ({ items }) => {
           <div className="-my-2 -mr-2 md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+              className="inline-flex items-center justify-center rounded-md opacity-100 p-2 text-secondary  hover:text-menuHighlightBlue"
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open menu</span>
@@ -60,15 +67,15 @@ export const MainMenu = ({ items }) => {
                     <>
                       <Popover.Button
                         className={classNames(
-                          open ? "text-gray-900" : "text-gray-500",
-                          "group z-20 inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none",
+                          open ? "text-menuHighlightBlue" : "text-secondary", //button for dropdown
+                          "hover:text-menuHighlightBlue group z-20 inline-flex items-center rounded-md text-base font-medium opacity-100 focus:outline-none",
                         )}
                       >
                         {item.label}
-                        <ChevronDownIcon
+                        <ChevronDownIcon //arrow  for dropdown
                           className={classNames(
-                            open ? "text-gray-600" : "text-gray-400",
-                            "ml-2 h-5 w-5 group-hover:text-gray-500",
+                            open ? "text-menuHighlightBlue" : "text-secondary",
+                            "group-hover:text-menuHighlightBlue ml-2 h-5 w-5",
                           )}
                           aria-hidden="true"
                         />
@@ -113,7 +120,7 @@ export const MainMenu = ({ items }) => {
                   href={item.destination}
                   passHref
                 >
-                  <a className="text-base font-medium text-gray-500 hover:text-gray-900">
+                  <a className="hover:text-menuHighlightBlue text-base font-medium text-secondary">
                     {item.label}
                   </a>
                 </Link>
@@ -122,15 +129,16 @@ export const MainMenu = ({ items }) => {
           </Popover.Group>
           {/* //! Desktop end */}
 
-          <div className="z-20 hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+          {/* <div className="z-20 hidden items-center justify-end md:flex md:flex-1 lg:w-0"> */}
+          <div className="z-20  items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link legacyBehavior href="#" passHref>
-              <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                Sign in
+              <a className="hover:text-menuHighlightBlue whitespace-nowrap text-base font-medium text-secondary">
+                Login
               </a>
             </Link>
             <Link legacyBehavior href="#" passHref>
-              <a className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primaryLight">
-                Sign up
+              <a className="hover:text-menuHighlightBlue ml-3 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-secondary shadow-sm">
+                Join Now
               </a>
             </Link>
           </div>
@@ -145,12 +153,12 @@ export const MainMenu = ({ items }) => {
           onClose={setMobileMenuOpen}
         >
           <div className="fixed inset-0 z-40 overflow-hidden">
-            <Dialog.Panel className="absolute inset-0 h-full w-full max-w-xs bg-white p-4">
-              <div className="flex items-center justify-between">
+            <Dialog.Panel className="absolute inset-0 h-full w-full max-w-xs bg-primary opacity-90 p-4">
+              <div className="flex items-center justify-between text-secondary">
                 <Dialog.Title>Menu</Dialog.Title>
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+                  className="inline-flex items-center justify-center rounded-md  p-2 text-background hover:bg-gray-100 hover:text-gray-500"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -167,7 +175,7 @@ export const MainMenu = ({ items }) => {
                         href={item.destination || "#"}
                         passHref
                       >
-                        <a className="rounded-md p-2 text-base font-medium text-gray-900 hover:bg-gray-100">
+                        <a className="rounded-md p-2 text-base font-medium text-secondary hover:bg-menuHighlightBlue">
                           {item.label}
                         </a>
                       </Link>
@@ -180,7 +188,7 @@ export const MainMenu = ({ items }) => {
                               legacyBehavior
                               passHref
                             >
-                              <a className="group flex items-center rounded-md px-2 py-2 text-sm font-medium leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-200">
+                              <a className="group flex items-center rounded-md px-2 py-2 text-sm font-medium leading-5 text-secondary hover:bg-gray-100 focus:bg-primaryDark">
                                 {subItem.label}
                               </a>
                             </Link>

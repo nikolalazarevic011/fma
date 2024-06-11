@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import client from "client";
 import { BlockRenderer } from "components/BlockRenderer";
+import FooterMenu from "components/FooterMenu/FooterMenu";
 import { MainMenu } from "components/MainMenu/MainMenu";
 import { cleanAndTransformBlocks } from "utils/cleanAndTransformBlocks";
 import { mapMainMenuItems } from "utils/mapMainMenuItems";
@@ -9,8 +10,9 @@ export default function Home(props) {
   console.log("PROPS", props);
   return (
     <div>
-      <MainMenu items={props.mainMenuItems}/>
+      <MainMenu items={props.mainMenuItems} />
       <BlockRenderer blocks={props.blocks} />
+      <FooterMenu socialLinks={props.footerMenuItems} />
     </div>
   );
 }
@@ -48,6 +50,18 @@ export const getStaticProps = async () => {
             }
           }
         }
+        acfOptionsFooterMenu {
+          footerMenu {
+            label1
+            url1
+            label2
+            url2
+            label3
+            url3
+            label4
+            url4
+          }
+        }
       }
     `,
   });
@@ -56,6 +70,7 @@ export const getStaticProps = async () => {
       mainMenuItems: mapMainMenuItems(
         data.acfOptionsMainMenu.mainMenu.menuItems,
       ),
+      footerMenuItems: data.acfOptionsFooterMenu.footerMenu,
       blocks: cleanAndTransformBlocks(data.nodeByUri.blocks),
     },
   };

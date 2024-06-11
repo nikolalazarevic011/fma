@@ -9,10 +9,12 @@ module.exports = {
     extend: {
       colors: {
         primary: "#002063",
-        secondary: "#fbe6ba",
+        secondary: "#fbe6ba",  //gold color
         primaryLight: "#248acc",
         primaryDark: "#002b4e",
         headingRed: "#F12006",
+        background: "#ffffff",
+        menuHighlightBlue: "#1fffff"
       },
       fontFamily: {
         heading: ["Aboreto", "cursive"],
