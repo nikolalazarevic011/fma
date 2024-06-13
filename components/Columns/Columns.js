@@ -1,7 +1,5 @@
 import { useIsNotMobile } from "utils/useIsNotMobile";
-import {
-  getAlignmentClass,
-} from "utils/spacingAndAlignment";
+import { getAlignmentClass } from "utils/spacingAndAlignment";
 
 export const Columns = ({
   isStackedOnMobile,
@@ -18,10 +16,15 @@ export const Columns = ({
 
   return (
     <div
-      style={{ ...textColorStyle, ...backgroundColorStyle, ...marginTopClass }}
+      style={{
+        ...textColorStyle,
+        ...backgroundColorStyle,
+        ...marginTopClass,
+        position: "relative",
+      }}
     >
       <div
-        className={`max-w-7xl mx-auto  ${
+        className={`mx-auto max-w-7xl ${
           isStackedOnMobile ? "block md:flex" : "flex"
         } ${getAlignmentClass(verticalAlignment)} `}
       >

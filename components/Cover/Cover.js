@@ -12,12 +12,11 @@ export const Cover = ({
   const color = getOverlayColor(overlay); // Example color: #002063
   const isNotMobile = useIsNotMobile();
 
-
-    // Create a single object for all height styles
-    const styles = {
-        ...(isNotMobile && desktopHeight) && { height: desktopHeight }, // Optional height only if isNotMobile and contentSize is defined
-        ...(isNotMobile === false) && { height: mobileHeight }, // Mobile height
-      };
+  // Create a single object for all height styles
+  const styles = {
+    ...(isNotMobile && desktopHeight && { height: desktopHeight }), // Optional height only if isNotMobile and contentSize is defined
+    ...(isNotMobile === false && { height: mobileHeight }), // Mobile height
+  };
 
   return (
     <div

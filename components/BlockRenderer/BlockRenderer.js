@@ -1,3 +1,4 @@
+import { AcfImage } from "components/AcfImage";
 import AcfSlider from "components/AcfSlider/AcfSlider";
 import { ButtonLink } from "components/ButtonLink";
 import { CallToActionButton } from "components/CallToActionButton";
@@ -33,20 +34,8 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/acfimage": {
-        return (
-          <div
-            key={block.id}
-            className={`flex justify-${block.attributes.data.align} mb-8`}
-          >
-            <Image
-              src={block.attributes.data.url}
-              height={block.attributes.data.height}
-              width={block.attributes.data.width}
-              alt={block.attributes.data.alt || ""}
-              priority
-            />
-          </div>
-        );
+        //more props inside
+        return <AcfImage block={block} />;
       }
       case "core/post-title": {
         return (
