@@ -6,6 +6,7 @@ import { Column } from "components/Column";
 import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
+import Media_text from "components/Media_text/Media_text";
 import { Paragraph } from "components/Paragraph";
 import { AcfVideo } from "components/acfVideo";
 import Image from "next/image";
@@ -24,18 +25,36 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "core/image": {
         return (
-          <Image
-            src={block.attributes.url}
-            height={block.attributes.height}
-            width={block.attributes.width}
-            alt={block.attributes.alt || ""}
-            priority
-          />
+          <div className="">
+            <Image
+              src={block.attributes.url}
+              height={block.attributes.height}
+              width={block.attributes.width}
+              alt={block.attributes.alt || ""}
+              priority
+            />
+          </div>
         );
       }
       case "acf/acfimage": {
         //more props inside
         return <AcfImage block={block} />;
+      }
+      case "core/media-text": {
+        //more props inside
+        return (
+          <Media_text
+            block={block}
+            innerBlocks={block.innerBlocks}
+            mediaPosition={block.attributes.mediaPosition}
+            mediaLink={block.attributes.mediaLink}
+            verticalAlignment={block.attributes.verticalAlignment}
+            height={block.attributes.height}
+            width={block.attributes.width}
+          >
+            <BlockRenderer blocks={block.innerBlocks}/>
+          </Media_text>
+        );
       }
       case "core/post-title": {
         return (
@@ -112,6 +131,7 @@ export const BlockRenderer = ({ blocks }) => {
             marginTop={block.attributes.style?.spacing?.margin?.top} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
             verticalAlignment={block.attributes.verticalAlignment}
             // spacing={block.attributes.style?.spacing} // kad napravis util klasu da samo paste spacing a ona odradi sve
+            border={block.attributes?.style?.border}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Columns>

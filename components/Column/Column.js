@@ -23,7 +23,7 @@ export const Column = ({
   return (
     <div
       style={{ ...widthStyle, ...textColorStyle, ...backgroundColorStyle }}
-      className={`px-2 pt-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderBottomColorClass(borderBottomColor)}`}
+      className={`px-2 py-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderBottomColorClass(borderBottomColor)}`}
     >
       {children}
     </div>

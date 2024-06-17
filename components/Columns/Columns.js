@@ -1,5 +1,6 @@
 import { useIsNotMobile } from "utils/useIsNotMobile";
 import { getAlignmentClass } from "utils/spacingAndAlignment";
+import { getBorderTopWidthClass } from "utils/border";
 
 export const Columns = ({
   isStackedOnMobile,
@@ -8,6 +9,7 @@ export const Columns = ({
   backgroundColor,
   marginTop,
   verticalAlignment,
+  border, //didn't work last time, try without for now
 }) => {
   const isNotMobile = useIsNotMobile();
   const textColorStyle = textColor ? { color: textColor } : {};

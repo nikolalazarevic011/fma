@@ -42,7 +42,7 @@ export const Cover = ({
           }}
         />
       </div>
-      <div className="z-10 max-w-5xl">{children}</div>
+      <div className="z-10 max-w-7xl">{children}</div>
     </div>
   );
 };

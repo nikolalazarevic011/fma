@@ -54,6 +54,7 @@ export const getMarginTopClass = (marginTop) => {
 export const getMarginBottomClass = (marginBottom) => {
   const marginMap = {
     "-3rem": "-mb-20", // if passing rem value
+    "-5": "-mb-5", // if passing rem value
     1: "mb-1",
     2: "mb-2",
     4: "mb-4",
