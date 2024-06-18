@@ -8,13 +8,14 @@ export const ButtonLink = ({ destination, label, fullWidth, color }) => {
   return (
     <Link href={destination} legacyBehavior>
       <a
-        className={`inline-block my-2 px-4 py-2 uppercase rounded-md cursor-pointer font-bold border-2 ${
+        className={`my-2 inline-block cursor-pointer rounded-md 
+          border-2 px-3 py-2 font-bold uppercase ${
           fullWidth ? "w-full text-center" : ""
         }`}
         style={{
           color: buttonColor,
           borderColor: buttonColor,
-          backgroundColor: 'transparent',
+          backgroundColor: "transparent",
         }}
       >
         {label}

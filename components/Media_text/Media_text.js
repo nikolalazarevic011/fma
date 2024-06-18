@@ -24,7 +24,7 @@ export default function MediaText({
       >
         {/* Media Container */}
         <div
-          className={`md:flex-1 ${isNotMobile ?  mediaColumnClass : ""} ${isNotMobile ? "mb-0" : "mb-4"}`}
+          className={`mr-4 md:flex-1 ${isNotMobile ? mediaColumnClass : ""} ${isNotMobile ? "mb-0" : "mb-4"}`}
         >
           <Image
             src={mediaLink}

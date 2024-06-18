@@ -56,9 +56,9 @@ export const BlockRenderer = ({ blocks }) => {
           </Media_text>
         );
       }
-      case "core/post-title": {
+      case "core/post-title": { 
         return (
-          <Heading
+          <Heading //one of two
             key={block.id}
             level={block.attributes.level}
             textAlign={block.attributes.textAlign}
@@ -107,10 +107,10 @@ export const BlockRenderer = ({ blocks }) => {
             key={block.id}
             textAlign={block.attributes.textAlign}
             content={block.attributes.content}
-            // textColor={
-            //   theme[block.attributes.textColor] ||
-            //   block.attributes.style?.color?.text
-            // }
+            textColor={
+              theme[block.attributes.textColor] ||
+              block.attributes.style?.color?.text
+            }
           />
         );
       }

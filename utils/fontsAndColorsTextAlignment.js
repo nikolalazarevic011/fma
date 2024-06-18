@@ -29,6 +29,7 @@ export const getColorClass = (color = "primary") => {
     primaryLight: "text-primaryLight",
     primaryDark: "text-primaryDark",
     white: "text-white",
+    background: "text-white",
     black: "text-black",
     headingRed: "text-headingRed",
     "var:preset|color|background": 'text-white'
