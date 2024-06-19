@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Children } from "react";
-import { useIsNotMobile } from "utils/useIsNotMobile";
+import { useIsMobile } from "utils/useIsMobile";
 
 export default function MediaText({
   block,
@@ -12,7 +12,7 @@ export default function MediaText({
   innerBlocks,
   children,
 }) {
-  const isNotMobile = useIsNotMobile();
+  const isMobile = useIsMobile();
 
   // Determine media column placement based on mediaPosition
   const mediaColumnClass = mediaPosition === "left" ? "" : "md:order-last";
@@ -20,11 +20,11 @@ export default function MediaText({
   return (
     <div className="mx-auto max-w-7xl px-2 py-5">
       <div
-        className={`flex ${isNotMobile ? "flex-row" : "flex-col"} items-${verticalAlignment}`}
+        className={`flex ${isMobile ? "flex-row" : "flex-col"} items-${verticalAlignment}`}
       >
         {/* Media Container */}
         <div
-          className={`mr-4 md:flex-1 ${isNotMobile ? mediaColumnClass : ""} ${isNotMobile ? "mb-0" : "mb-4"}`}
+          className={`mr-4 md:flex-1 ${isMobile ? mediaColumnClass : ""} ${isMobile ? "mb-0" : "mb-4"}`}
         >
           <Image
             src={mediaLink}

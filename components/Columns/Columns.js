@@ -1,4 +1,4 @@
-import { useIsNotMobile } from "utils/useIsNotMobile";
+import { useIsMobile } from "utils/useIsMobile";
 import { getAlignmentClass } from "utils/spacingAndAlignment";
 import { getBorderTopWidthClass } from "utils/border";
 
@@ -11,10 +11,10 @@ export const Columns = ({
   verticalAlignment,
   border, //didn't work last time, try without for now
 }) => {
-  const isNotMobile = useIsNotMobile();
+  const isMobile = useIsMobile();
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
-  const marginTopClass = isNotMobile && marginTop ? { marginTop } : "";
+  const marginTopClass = isMobile && marginTop ? { marginTop } : "";
 
   return (
     <div

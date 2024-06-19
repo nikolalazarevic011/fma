@@ -53,7 +53,7 @@ export const MainMenu = ({ items }) => {
           <div className="-my-2 -mr-2 md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-secondary opacity-100 hover:text-menuHighlightBlue"
+              className="inline-flex items-center justify-center rounded-md p-2 text-secondary opacity-100 "
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open menu</span>

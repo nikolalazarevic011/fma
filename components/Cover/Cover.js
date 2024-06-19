@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getOverlayColor } from "utils/imageProps";
-import { useIsNotMobile } from "utils/useIsNotMobile";
+import { useIsMobile } from "utils/useIsMobile";
 import { useRouter } from "next/router";
 export const Cover = ({
   children,
@@ -8,19 +8,19 @@ export const Cover = ({
   overlay,
   mobileHeight,
   desktopHeight,
-  id
+  id,
 }) => {
   const color = getOverlayColor(overlay); // Example color: #002063
-  const isNotMobile = useIsNotMobile();
+  const isMobile = useIsMobile();
   const router = useRouter();
 
   // Create a single object for all height styles
   const styles = {
-    ...(isNotMobile && desktopHeight && { height: desktopHeight }), // Optional height only if isNotMobile and contentSize is defined
-    ...(isNotMobile === false && { height: mobileHeight }), // Mobile height
+    ...(isMobile && desktopHeight && { height: desktopHeight }), // Optional height only if isMobile and contentSize is defined
+    ...(isMobile === false && { height: mobileHeight }), // Mobile height
   };
-  const imageStyle = router.pathname === "/" ? { objectPosition: "center top" } : {};
-
+  const imageStyle =
+    router.pathname === "/" ? { objectPosition: "center top" } : {};
 
   return (
     <div
@@ -46,7 +46,7 @@ export const Cover = ({
           }}
         />
       </div>
-      <div className="z-10 max-w-7xl" >{children}</div>
+      <div className="z-10 max-w-7xl">{children}</div>
     </div>
   );
 };

@@ -1,19 +1,19 @@
 import { getTextAlign } from "utils/fontsAndColorsTextAlignment";
 import { relativeToAbsoluteUrls } from "utils/relativeToAbsoluteUrls";
-import { useIsNotMobile } from "utils/useIsNotMobile";
+import { useIsMobile } from "utils/useIsMobile";
 
 export const Paragraph = ({ textAlign = "left", content, textColor }) => {
-  const isNotMobile = useIsNotMobile();
+  const isMobile = useIsMobile();
 
-  const textAlignClass = isNotMobile ? getTextAlign(textAlign) : 'text-center';
+  const textAlignClass = isMobile ? getTextAlign(textAlign) : "text-center";
 
-    return (
-        <p
-            className={`mx-auto my-3 font-light max-w-7xl ${textAlignClass}`}
-            style={{ color: textColor }}
-            dangerouslySetInnerHTML={{
-                __html: relativeToAbsoluteUrls(content),
-            }}
-        />
-    );
+  return (
+    <p
+      className={`mx-auto my-3 max-w-7xl font-light ${textAlignClass}`}
+      style={{ color: textColor }}
+      dangerouslySetInnerHTML={{
+        __html: relativeToAbsoluteUrls(content),
+      }}
+    />
+  );
 };
