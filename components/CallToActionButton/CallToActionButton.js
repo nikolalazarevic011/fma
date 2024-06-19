@@ -12,7 +12,7 @@ export const CallToActionButton = ({
     right: "text-right",
   };
   return (
-    <div className={`${alignMap[align]} `}>
+    <div className={`${alignMap[align]} text-nowrap`}>
       <ButtonLink destination={destination} label={buttonLabel} color={color} />
     </div>
   );

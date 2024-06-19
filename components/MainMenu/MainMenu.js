@@ -15,6 +15,10 @@ function classNames(...classes) {
 export const MainMenu = ({ items }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const handleMenuItemClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header
       className="bg-white shadow-sm"
@@ -49,7 +53,7 @@ export const MainMenu = ({ items }) => {
           <div className="-my-2 -mr-2 md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md opacity-100 p-2 text-secondary  hover:text-menuHighlightBlue"
+              className="inline-flex items-center justify-center rounded-md p-2 text-secondary opacity-100 hover:text-menuHighlightBlue"
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open menu</span>
@@ -68,14 +72,14 @@ export const MainMenu = ({ items }) => {
                       <Popover.Button
                         className={classNames(
                           open ? "text-menuHighlightBlue" : "text-secondary", //button for dropdown
-                          "hover:text-menuHighlightBlue group z-20 inline-flex items-center rounded-md text-base font-medium opacity-100 focus:outline-none",
+                          "group z-20 inline-flex items-center rounded-md text-base font-medium opacity-100 hover:text-menuHighlightBlue focus:outline-none",
                         )}
                       >
                         {item.label}
                         <ChevronDownIcon //arrow  for dropdown
                           className={classNames(
                             open ? "text-menuHighlightBlue" : "text-secondary",
-                            "group-hover:text-menuHighlightBlue ml-2 h-5 w-5",
+                            "ml-2 h-5 w-5 group-hover:text-menuHighlightBlue",
                           )}
                           aria-hidden="true"
                         />
@@ -99,7 +103,10 @@ export const MainMenu = ({ items }) => {
                                   href={subItem.destination}
                                   passHref
                                 >
-                                  <a className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
+                                  <a
+                                    className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
+                                    onClick={handleMenuItemClick}
+                                  >
                                     <p className="text-base font-medium text-gray-900">
                                       {subItem.label}
                                     </p>
@@ -120,7 +127,7 @@ export const MainMenu = ({ items }) => {
                   href={item.destination}
                   passHref
                 >
-                  <a className="hover:text-menuHighlightBlue text-base font-medium text-secondary">
+                  <a className="text-base font-medium text-secondary hover:text-menuHighlightBlue" onClick={handleMenuItemClick}>
                     {item.label}
                   </a>
                 </Link>
@@ -130,14 +137,14 @@ export const MainMenu = ({ items }) => {
           {/* //! Desktop end */}
 
           {/* <div className="z-20 hidden items-center justify-end md:flex md:flex-1 lg:w-0"> */}
-          <div className="z-20  items-center justify-end md:flex md:flex-1 lg:w-0">
+          <div className="z-20 items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link legacyBehavior href="#" passHref>
-              <a className="hover:text-menuHighlightBlue whitespace-nowrap text-base font-medium text-secondary">
+              <a className="whitespace-nowrap text-base font-medium text-secondary hover:text-menuHighlightBlue" onClick={handleMenuItemClick}>
                 Login
               </a>
             </Link>
             <Link legacyBehavior href="#" passHref>
-              <a className="hover:text-menuHighlightBlue ml-3 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-secondary shadow-sm">
+              <a className="ml-3 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-secondary shadow-sm hover:text-menuHighlightBlue" onClick={handleMenuItemClick}>
                 Join Now
               </a>
             </Link>
@@ -153,12 +160,12 @@ export const MainMenu = ({ items }) => {
           onClose={setMobileMenuOpen}
         >
           <div className="fixed inset-0 z-40 overflow-hidden">
-            <Dialog.Panel className="absolute inset-0 h-full w-full max-w-xs bg-primary opacity-90 p-4">
+            <Dialog.Panel className="absolute inset-0 h-full w-full max-w-xs bg-primary p-4 opacity-90">
               <div className="flex items-center justify-between text-secondary">
                 <Dialog.Title>Menu</Dialog.Title>
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center rounded-md  p-2 text-background hover:bg-gray-100 hover:text-gray-500"
+                  className="inline-flex items-center justify-center rounded-md p-2 text-background hover:bg-gray-100 hover:text-gray-500"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -175,7 +182,7 @@ export const MainMenu = ({ items }) => {
                         href={item.destination || "#"}
                         passHref
                       >
-                        <a className="rounded-md p-2 text-base font-medium text-secondary hover:bg-menuHighlightBlue">
+                        <a className="rounded-md p-2 text-base font-medium text-secondary hover:bg-menuHighlightBlue" onClick={handleMenuItemClick}>
                           {item.label}
                         </a>
                       </Link>
@@ -188,7 +195,7 @@ export const MainMenu = ({ items }) => {
                               legacyBehavior
                               passHref
                             >
-                              <a className="group flex items-center rounded-md px-2 py-2 text-sm font-medium leading-5 text-secondary hover:bg-gray-100 focus:bg-primaryDark">
+                              <a className="group flex items-center rounded-md px-2 py-2 text-sm font-medium leading-5 text-secondary hover:bg-gray-100 focus:bg-primaryDark" onClick={handleMenuItemClick}>
                                 {subItem.label}
                               </a>
                             </Link>

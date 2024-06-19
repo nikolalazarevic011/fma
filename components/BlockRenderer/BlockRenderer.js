@@ -6,6 +6,8 @@ import { Column } from "components/Column";
 import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
+import { List } from "components/List";
+import { ListItem } from "components/ListItem";
 import Media_text from "components/Media_text/Media_text";
 import { Paragraph } from "components/Paragraph";
 import { AcfVideo } from "components/acfVideo";
@@ -25,7 +27,7 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "core/image": {
         return (
-          <div className="">
+          <div className="" key={block.id}>
             <Image
               src={block.attributes.url}
               height={block.attributes.height}
@@ -44,6 +46,7 @@ export const BlockRenderer = ({ blocks }) => {
         //more props inside
         return (
           <Media_text
+            key={block.id}
             block={block}
             innerBlocks={block.innerBlocks}
             mediaPosition={block.attributes.mediaPosition}
@@ -52,11 +55,11 @@ export const BlockRenderer = ({ blocks }) => {
             height={block.attributes.height}
             width={block.attributes.width}
           >
-            <BlockRenderer blocks={block.innerBlocks}/>
+            <BlockRenderer blocks={block.innerBlocks} />
           </Media_text>
         );
       }
-      case "core/post-title": { 
+      case "core/post-title": {
         return (
           <Heading //one of two
             key={block.id}
@@ -81,6 +84,7 @@ export const BlockRenderer = ({ blocks }) => {
         return (
           <Cover
             key={block.id}
+            id={block.id}
             background={block.attributes.url}
             overlay={block.attributes.overlayColor}
             mobileHeight={block.attributes.layout.contentSize}
@@ -114,6 +118,20 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
+      case "core/list": {
+        return (
+          <List key={block.id} items={block.innerBlocks}>
+            <BlockRenderer key={block.id} blocks={block.innerBlocks} />
+          </List>
+        );
+      }
+      // case "core/list-item": {
+      //   return (
+      //     <ListItem key={block.id} content={block.attributes.content}>
+      //       <BlockRenderer key={block.id} blocks={block.innerBlocks} />
+      //     </ListItem>
+      //   );
+      // }
       case "core/columns": {
         console.log("COLUMNS: ", block.attributes);
         return (
@@ -133,7 +151,7 @@ export const BlockRenderer = ({ blocks }) => {
             // spacing={block.attributes.style?.spacing} // kad napravis util klasu da samo paste spacing a ona odradi sve
             border={block.attributes?.style?.border}
           >
-            <BlockRenderer blocks={block.innerBlocks} />
+            <BlockRenderer key={block.id}  blocks={block.innerBlocks} />
           </Columns>
         );
       }
@@ -154,7 +172,7 @@ export const BlockRenderer = ({ blocks }) => {
             borderBottom={block.attributes.style?.border?.bottom?.width}
             borderBottomColor={block.attributes.style?.border?.bottom?.color}
           >
-            <BlockRenderer blocks={block.innerBlocks} />
+            <BlockRenderer key={block.id} blocks={block.innerBlocks} />
           </Column>
         );
       }
@@ -165,7 +183,7 @@ export const BlockRenderer = ({ blocks }) => {
             buttonLabel={block.attributes.data.label}
             destination={block.attributes.data.destination || "/"}
             align={block.attributes.data.align}
-            color={block.attributes.data.color}
+            color={block.attributes.data?.color}
           />
         );
       }
