@@ -8,7 +8,6 @@ export const getTextAlign = (textAlign = "left") => {
   return `${textAlignMap[textAlign] || ""}`;
 };
 
-
 export const getFontSizeForHeading = (level, isMobile) => {
   // Adjust level for mobile if necessary
   if (isMobile && level <= 5) {
@@ -41,7 +40,9 @@ export const getColorClass = (color = "primary") => {
     background: "text-white",
     black: "text-black",
     headingRed: "text-headingRed",
-    "var:preset|color|background": "text-white",
+    "var:preset|color|background": "text-white", //? working?
+    "#ff6a00": "text-headingOrange",
+    headingOrange: "text-headingOrange",
   };
 
   return `${colorMap[color] || ""}`;

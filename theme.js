@@ -5,4 +5,6 @@ export const theme = {
   secondary: "#fbe6ba",
   primaryLight: "#248acc",
   primaryDark: "#002b4e",
+  headingOrange: "#ff6a00"
+
 };

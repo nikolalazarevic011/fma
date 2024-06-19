@@ -43,6 +43,7 @@ export const getMarginTopClass = (marginTop) => {
     "-3rem": "-mt-20", // ovako ako pasujes rem za vrednost
     4: "mt-4",
     8: "mt-8",
+    "2rem": "mt-8",
     10: "mt-40",
     20: "mt-20",
   };
@@ -53,13 +54,14 @@ export const getMarginTopClass = (marginTop) => {
 
 export const getMarginBottomClass = (marginBottom) => {
   const marginMap = {
-    "-3rem": "-mb-20", // if passing rem value
-    "-5": "-mb-5", // if passing rem value
+    "-5": "-mb-5", // if passing  - rem value
+    "-2": "-mb-8",
     1: "mb-1",
     2: "mb-2",
     4: "mb-4",
     6: "mb-6",
     8: "mb-8",
+    "2rem": "mt-8",
     10: "mb-10",
     12: "mb-12",
     16: "mb-16",

@@ -1,13 +1,11 @@
 import { AcfImage } from "components/AcfImage";
 import AcfSlider from "components/AcfSlider/AcfSlider";
-import { ButtonLink } from "components/ButtonLink";
 import { CallToActionButton } from "components/CallToActionButton";
 import { Column } from "components/Column";
 import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
 import { List } from "components/List";
-import { ListItem } from "components/ListItem";
 import Media_text from "components/Media_text/Media_text";
 import { Paragraph } from "components/Paragraph";
 import { AcfVideo } from "components/acfVideo";
@@ -21,8 +19,25 @@ export const BlockRenderer = ({ blocks }) => {
   }
   return blocks.map((block) => {
     switch (block.name) {
-      case "core/block": //ovako moze kad vracaju isto
+      case "core/block": {
+        return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
+      }
       case "core/group": {
+        // Check for specific layout attributes and apply a row layout if conditions match
+        if (
+          block.attributes.layout?.type === "flex" &&
+          block.attributes.layout?.flexWrap === "nowrap"
+        ) {
+          return (
+            <div
+              key={block.id}
+              className="flex flex-row flex-nowrap items-center"
+            >
+              <BlockRenderer blocks={block.innerBlocks} />
+            </div>
+          );
+        }
+        // Default BlockRenderer call for nested blocks
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
       }
       case "core/image": {
@@ -69,6 +84,16 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
+      case "core/post-title": {
+        return (
+          <Heading //one of two
+            key={block.id}
+            level={block.attributes.level}
+            textAlign={block.attributes.textAlign}
+            content={block.attributes.content}
+          />
+        );
+      }
       case "core/heading": {
         return (
           <Heading
@@ -76,7 +101,9 @@ export const BlockRenderer = ({ blocks }) => {
             level={block.attributes.level}
             textAlign={block.attributes.textAlign}
             content={block.attributes.content}
-            color={block.attributes.textColor}
+            color={
+              block.attributes.textColor || block.attributes.style?.color?.text
+            }
           />
         );
       }
@@ -98,9 +125,6 @@ export const BlockRenderer = ({ blocks }) => {
       case "core/buttons": {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
       }
-      //   case "core/button": {
-      //     return <ButtonLink blocks={block.innerBlocks} />;
-      //   }
       case "core/block": //ovako moze kad vracaju isto
       case "core/group": {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
@@ -125,13 +149,6 @@ export const BlockRenderer = ({ blocks }) => {
           </List>
         );
       }
-      // case "core/list-item": {
-      //   return (
-      //     <ListItem key={block.id} content={block.attributes.content}>
-      //       <BlockRenderer key={block.id} blocks={block.innerBlocks} />
-      //     </ListItem>
-      //   );
-      // }
       case "core/columns": {
         console.log("COLUMNS: ", block.attributes);
         return (
@@ -147,16 +164,19 @@ export const BlockRenderer = ({ blocks }) => {
               block.attributes.style?.color?.background
             }
             marginTop={block.attributes.style?.spacing?.margin?.top} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
+            marginBottom={block.attributes.style?.spacing?.margin?.bottom} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
             verticalAlignment={block.attributes.verticalAlignment}
             // spacing={block.attributes.style?.spacing} // kad napravis util klasu da samo paste spacing a ona odradi sve
-            border={block.attributes?.style?.border}
+            borderWidth={block.attributes?.style?.border?.width}
+            borderRadius={block.attributes?.style?.border?.radius}
+            borderColor={block.attributes?.borderColor}
+
           >
-            <BlockRenderer key={block.id}  blocks={block.innerBlocks} />
+            <BlockRenderer key={block.id} blocks={block.innerBlocks} />
           </Columns>
         );
       }
       case "core/column": {
-        // console.log("COLUMN: ", block.attributes);
         return (
           <Column
             key={block.id}

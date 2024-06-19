@@ -16,8 +16,7 @@ export const Cover = ({
 
   // Create a single object for all height styles
   const styles = {
-    ...(isMobile && desktopHeight && { height: desktopHeight }), // Optional height only if isMobile and contentSize is defined
-    ...(isMobile === false && { height: mobileHeight }), // Mobile height
+    ...(isMobile ? { height: mobileHeight } : { height: desktopHeight }),
   };
   const imageStyle =
     router.pathname === "/" ? { objectPosition: "center top" } : {};

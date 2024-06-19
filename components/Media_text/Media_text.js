@@ -20,11 +20,11 @@ export default function MediaText({
   return (
     <div className="mx-auto max-w-7xl px-2 py-5">
       <div
-        className={`flex ${isMobile ? "flex-row" : "flex-col"} items-${verticalAlignment}`}
+        className={`flex ${!isMobile ? "flex-row" : "flex-col"} items-${verticalAlignment}`}
       >
         {/* Media Container */}
         <div
-          className={`mr-4 md:flex-1 ${isMobile ? mediaColumnClass : ""} ${isMobile ? "mb-0" : "mb-4"}`}
+          className={`sm:mx-6 md:flex-1 ${!isMobile ? mediaColumnClass : ""} ${!isMobile ? "mb-0" : "mb-4"}`}
         >
           <Image
             src={mediaLink}

@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  getBorderBottomColorClass,
-  getBorderBottomWidthClass,
-} from "utils/border";
+import { getBorderColorClass, getBorderBottomWidthClass } from "utils/border";
 
 export const Column = ({
   children,
@@ -23,7 +20,7 @@ export const Column = ({
   return (
     <div
       style={{ ...widthStyle, ...textColorStyle, ...backgroundColorStyle }}
-      className={`px-2 py-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderBottomColorClass(borderBottomColor)}`}
+      className={`px-2 py-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderColorClass(borderBottomColor)}`}
     >
       {children}
     </div>

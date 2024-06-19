@@ -10,7 +10,7 @@ import { useIsMobile } from "utils/useIsMobile";
 export const AcfImage = ({ block }) => {
   const isMobile = useIsMobile();
 
-  const marginTopClass = isMobile
+  const marginTopClass = !isMobile
     ? getMarginTopClass(block.attributes.data.margin_top)
     : "";
 
@@ -24,7 +24,7 @@ export const AcfImage = ({ block }) => {
           <Image
             src={block.attributes.data.url}
             height={block.attributes.data.height}
-            width={block.attributes.data.width}
+            width={block.attributes?.data?.width}
             alt={block.attributes.data.alt || ""}
             priority
           />

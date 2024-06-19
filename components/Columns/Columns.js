@@ -1,6 +1,13 @@
 import { useIsMobile } from "utils/useIsMobile";
-import { getAlignmentClass } from "utils/spacingAndAlignment";
-import { getBorderTopWidthClass } from "utils/border";
+import {
+  getAlignmentClass,
+  getMarginTopClass,
+} from "utils/spacingAndAlignment";
+import {
+  getBorderColorClass,
+  getBorderRadiusClass,
+  getBorderWidthClass,
+} from "utils/border";
 
 export const Columns = ({
   isStackedOnMobile,
@@ -8,13 +15,17 @@ export const Columns = ({
   textColor,
   backgroundColor,
   marginTop,
+  marginBottom,
   verticalAlignment,
-  border, //didn't work last time, try without for now
+  borderWidth, //didn't work last time, try without for now
+  borderRadius,
+  borderColor,
 }) => {
   const isMobile = useIsMobile();
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
-  const marginTopClass = isMobile && marginTop ? { marginTop } : "";
+  const marginTopClass = !isMobile && marginTop ? { marginTop } : "";
+  const marginBottomClass = !isMobile && marginBottom ? { marginBottom } : "";
 
   return (
     <div
@@ -22,13 +33,14 @@ export const Columns = ({
         ...textColorStyle,
         ...backgroundColorStyle,
         ...marginTopClass,
+        ...marginBottomClass,
         position: "relative",
       }}
     >
       <div
-        className={`mx-auto max-w-7xl ${
+        className={`mx-auto max-w-7xl ${getBorderRadiusClass(borderRadius)} ${
           isStackedOnMobile ? "block md:flex" : "flex"
-        } ${getAlignmentClass(verticalAlignment)} `}
+        } ${getAlignmentClass(verticalAlignment)} ${!isMobile && getBorderWidthClass(borderWidth)} ${getBorderColorClass(borderColor)} `}
       >
         {children}
       </div>

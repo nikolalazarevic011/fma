@@ -1,3 +1,17 @@
+export const getBorderWidthClass = (borderWidth = "0px") => {
+  const borderWidthMap = {
+    "0px": "",
+    "1px": "border-1",
+    "2px": "border-2",
+    "4px": "border-4",
+    "8px": "border-8",
+    "12px": "border-12",
+    "16px": "border-16",
+  };
+
+  return borderWidthMap[borderWidth] || "";
+};
+
 export const getBorderTopWidthClass = (borderTopWidth = "0px") => {
   const borderTopWidthMap = {
     "0px": "",
@@ -53,7 +67,7 @@ export const getBorderBottomWidthClass = (borderBottomWidth = "0px") => {
   return `${borderBottomWidthMap[borderBottomWidth] || ""}`;
 };
 
-export const getBorderBottomColorClass = (color = "primary") => {
+export const getBorderColorClass = (color = "primary") => {
   const colorMap = {
     primary: "border-primary",
     secondary: "border-secondary",
@@ -62,6 +76,7 @@ export const getBorderBottomColorClass = (color = "primary") => {
     white: "border-white",
     black: "border-black",
     headingRed: "border-headingRed",
+    headingOrange: "border-headingOrange",
     "var:preset|color|background": "border-white",
     "var:preset|color|primary": "border-primary",
     "var:preset|color|secondary": "border-secondary",
@@ -69,3 +84,20 @@ export const getBorderBottomColorClass = (color = "primary") => {
 
   return `${colorMap[color] || ""}`;
 };
+
+export const getBorderRadiusClass = (radius) => {
+  const borderRadiusMap = {
+    'none': 'rounded-none',
+    'sm': 'rounded-sm',
+    '6px': 'rounded-md',
+    'lg': 'rounded-lg',
+    'xl': 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    'full': 'rounded-full',
+    'large': 'rounded-large', // Custom class, make sure it's defined in Tailwind config
+  };
+
+  return `${borderRadiusMap[radius] || 'rounded-default'}`;
+};
+
