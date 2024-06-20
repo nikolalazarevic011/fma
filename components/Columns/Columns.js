@@ -38,7 +38,7 @@ export const Columns = ({
       }}
     >
       <div
-        className={`mx-auto max-w-7xl ${getBorderRadiusClass(borderRadius)} ${
+        className={`mx-auto max-w-5xl ${getBorderRadiusClass(borderRadius)} ${
           isStackedOnMobile ? "block md:flex" : "flex"
         } ${getAlignmentClass(verticalAlignment)} ${!isMobile && getBorderWidthClass(borderWidth)} ${getBorderColorClass(borderColor)} `}
       >

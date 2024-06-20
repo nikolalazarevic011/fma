@@ -170,7 +170,6 @@ export const BlockRenderer = ({ blocks }) => {
             borderWidth={block.attributes?.style?.border?.width}
             borderRadius={block.attributes?.style?.border?.radius}
             borderColor={block.attributes?.borderColor}
-
           >
             <BlockRenderer key={block.id} blocks={block.innerBlocks} />
           </Columns>
@@ -208,7 +207,14 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/acfvideo": {
-        return <AcfVideo key={block.id} src={block.attributes.data.url} />;
+        return (
+          <AcfVideo
+            key={block.id}
+            src={block.attributes.data.url}
+            height={block.attributes.data.height}
+            controls={block.attributes.data.show_controls}
+          />
+        );
       }
       case "acf/acfslider": {
         console.log(block.attributes.data);

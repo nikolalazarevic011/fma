@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getOverlayColor } from "utils/imageProps";
+import { getOverlayColor } from "utils/imageAndVideoProps";
 import { useIsMobile } from "utils/useIsMobile";
 import { useRouter } from "next/router";
 export const Cover = ({

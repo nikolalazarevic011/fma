@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      height: {
+        // Enables any arbitrary value
+        '590': '590px'
+      },
       borderWidth: {
         1: "1px",
         2: "2px",

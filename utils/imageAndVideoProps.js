@@ -8,3 +8,4 @@ export const getOverlayColor = (overlayColorSlug = "primary") => {
 
   return `${overlayColorMap[overlayColorSlug] || ""}`;
 };
+
