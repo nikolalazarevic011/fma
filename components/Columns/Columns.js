@@ -20,13 +20,14 @@ export const Columns = ({
   borderWidth, //didn't work last time, try without for now
   borderRadius,
   borderColor,
+  minHeight,
 }) => {
   const isMobile = useIsMobile();
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
   const marginTopClass = !isMobile && marginTop ? { marginTop } : "";
   const marginBottomClass = !isMobile && marginBottom ? { marginBottom } : "";
-
+  const minHeightStyle = minHeight ? { minHeight } : {};
   return (
     <div
       style={{
@@ -34,11 +35,12 @@ export const Columns = ({
         ...backgroundColorStyle,
         ...marginTopClass,
         ...marginBottomClass,
+        ...minHeightStyle,
         position: "relative",
       }}
     >
       <div
-        className={`mx-auto max-w-5xl ${getBorderRadiusClass(borderRadius)} ${
+        className={`cols mx-auto max-w-5xl ${getBorderRadiusClass(borderRadius)} ${
           isStackedOnMobile ? "block md:flex" : "flex"
         } ${getAlignmentClass(verticalAlignment)} ${!isMobile && getBorderWidthClass(borderWidth)} ${getBorderColorClass(borderColor)} `}
       >

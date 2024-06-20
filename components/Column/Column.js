@@ -9,18 +9,24 @@ export const Column = ({
   backgroundColor,
   borderBottom,
   borderBottomColor,
+  minHeight,
 }) => {
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
-
   const widthStyle = width
     ? { minWidth: width, flexGrow: 1 }
     : { flexGrow: 1, flexBasis: 0 };
+    const minHeightStyle = minHeight ? { minHeight } : {};
 
   return (
     <div
-      style={{ ...widthStyle, ...textColorStyle, ...backgroundColorStyle }}
-      className={`px-2 py-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderColorClass(borderBottomColor)}`}
+      style={{
+        ...widthStyle,
+        ...textColorStyle,
+        ...backgroundColorStyle,
+        ...minHeightStyle,
+      }}
+      className={`col px-2 py-5 ${getBorderBottomWidthClass(borderBottom)} ${getBorderColorClass(borderBottomColor)}`}
     >
       {children}
     </div>
@@ -28,7 +34,7 @@ export const Column = ({
 };
 
 Column.propTypes = {
-  children: PropTypes.node.isRequired,
+  // children: PropTypes.node.isRequired,
   width: PropTypes.string,
   textColor: PropTypes.string,
   backgroundColor: PropTypes.string,

@@ -84,16 +84,16 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
-      case "core/post-title": {
-        return (
-          <Heading //one of two
-            key={block.id}
-            level={block.attributes.level}
-            textAlign={block.attributes.textAlign}
-            content={block.attributes.content}
-          />
-        );
-      }
+      // case "core/post-title": {
+      //   return (
+      //     <Heading //one of two
+      //       key={block.id}
+      //       level={block.attributes.level}
+      //       textAlign={block.attributes.textAlign}
+      //       content={block.attributes.content}
+      //     />
+      //   );
+      // }
       case "core/heading": {
         return (
           <Heading
@@ -125,10 +125,10 @@ export const BlockRenderer = ({ blocks }) => {
       case "core/buttons": {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
       }
-      case "core/block": //ovako moze kad vracaju isto
-      case "core/group": {
-        return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
-      }
+      // case "core/block": //ovako moze kad vracaju isto
+      // case "core/group": {
+      //   return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
+      // }
       case "core/paragraph": {
         return (
           <Paragraph
@@ -144,7 +144,7 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "core/list": {
         return (
-          <List key={block.id} items={block.innerBlocks}>
+          <List items={block.innerBlocks}>
             <BlockRenderer key={block.id} blocks={block.innerBlocks} />
           </List>
         );
@@ -170,8 +170,9 @@ export const BlockRenderer = ({ blocks }) => {
             borderWidth={block.attributes?.style?.border?.width}
             borderRadius={block.attributes?.style?.border?.radius}
             borderColor={block.attributes?.borderColor}
+            minHeight={block.attributes?.style?.spacing?.blockGap?.top} //double check
           >
-            <BlockRenderer key={block.id} blocks={block.innerBlocks} />
+            <BlockRenderer blocks={block.innerBlocks} />
           </Columns>
         );
       }
@@ -190,8 +191,10 @@ export const BlockRenderer = ({ blocks }) => {
             }
             borderBottom={block.attributes.style?.border?.bottom?.width}
             borderBottomColor={block.attributes.style?.border?.bottom?.color}
+            minHeight={block.attributes?.style?.spacing?.blockGap}
+
           >
-            <BlockRenderer key={block.id} blocks={block.innerBlocks} />
+            <BlockRenderer blocks={block.innerBlocks} />
           </Column>
         );
       }

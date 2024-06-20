@@ -23,7 +23,7 @@ export const Cover = ({
 
   return (
     <div
-      className="relative flex items-center justify-center text-white"
+      className="cov relative flex items-center justify-center text-white"
       style={styles} // Apply inline style for height
     >
       <div className="absolute inset-0 z-0">
