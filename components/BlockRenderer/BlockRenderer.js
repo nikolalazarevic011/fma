@@ -203,9 +203,12 @@ export const BlockRenderer = ({ blocks }) => {
           <CallToActionButton
             key={block.id}
             buttonLabel={block.attributes.data.label}
-            destination={block.attributes.data.destination || "/"}
+            destination={block.attributes?.data?.destination}
             align={block.attributes.data.align}
             color={block.attributes.data?.color}
+            url={block.attributes.data?.external_url?.url}
+            transparency={block.attributes.data?.transparent_button}
+            openInNewTab={block.attributes.data?.external_url?.target}
           />
         );
       }

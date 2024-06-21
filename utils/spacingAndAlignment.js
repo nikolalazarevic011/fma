@@ -56,6 +56,7 @@ export const getMarginBottomClass = (marginBottom) => {
   const marginMap = {
     "-5": "-mb-5", // if passing  - rem value
     "-2": "-mb-8",
+    "-1": "-mb-1",
     1: "mb-1",
     2: "mb-2",
     4: "mb-4",

@@ -40,7 +40,7 @@ export const Columns = ({
       }}
     >
       <div
-        className={`cols mx-auto max-w-5xl ${getBorderRadiusClass(borderRadius)} ${
+        className={`cols mx-auto max-w-6xl ${getBorderRadiusClass(borderRadius)} ${
           isStackedOnMobile ? "block md:flex" : "flex"
         } ${getAlignmentClass(verticalAlignment)} ${!isMobile && getBorderWidthClass(borderWidth)} ${getBorderColorClass(borderColor)} `}
       >

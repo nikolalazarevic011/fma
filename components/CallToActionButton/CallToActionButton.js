@@ -4,7 +4,10 @@ export const CallToActionButton = ({
   align = "left",
   buttonLabel,
   destination,
-  color
+  color,
+  url,
+  openInNewTab,
+  transparency
 }) => {
   const alignMap = {
     left: "text-align",
@@ -13,7 +16,14 @@ export const CallToActionButton = ({
   };
   return (
     <div className={`${alignMap[align]} text-nowrap`}>
-      <ButtonLink destination={destination} label={buttonLabel} color={color} />
+      <ButtonLink
+        url={url}
+        openInNewTab={openInNewTab}
+        destination={destination}
+        label={buttonLabel}
+        color={color}
+        transparency={transparency}
+      />
     </div>
   );
 };
