@@ -5,7 +5,7 @@ import {
   XMarkIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 function classNames(...classes) {
@@ -14,9 +14,35 @@ function classNames(...classes) {
 
 export const MainMenu = ({ items }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState(null);
+  const router = useRouter();
+
+  const toggleSubmenu = (id) => {
+    if (items.find((item) => item.id === id).subMenuItems.length > 0) {
+      setOpenSubmenu(openSubmenu === id ? null : id);
+    }
+  };
 
   const handleMenuItemClick = () => {
     setMobileMenuOpen(false);
+  };
+
+  const normalizePath = (path) => {
+    // Ensure path is a string and remove trailing slash for consistent comparison
+    return path ? path.replace(/\/$/, "") : "";
+  };
+
+  const isActive = (path) => {
+    //  Guard against null or undefined paths
+    if (!path) return false;
+    const currentPath = normalizePath(router.asPath);
+    const targetPath = normalizePath(path);
+    // console.log(`Comparing ${currentPath} to ${targetPath}`);
+    return currentPath === targetPath;
+  };
+
+  const isAnySubMenuItemActive = (subMenuItems) => {
+    return subMenuItems.some((subItem) => isActive(subItem.destination));
   };
 
   return (
@@ -53,7 +79,7 @@ export const MainMenu = ({ items }) => {
           <div className="-my-2 -mr-2 md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-secondary opacity-100 "
+              className="inline-flex items-center justify-center rounded-md p-2 text-secondary opacity-100"
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open menu</span>
@@ -71,14 +97,18 @@ export const MainMenu = ({ items }) => {
                     <>
                       <Popover.Button
                         className={classNames(
-                          open ? "text-menuHighlightBlue" : "text-secondary", //button for dropdown
-                          "group z-20 inline-flex items-center rounded-md text-base font-medium opacity-100 hover:text-menuHighlightBlue focus:outline-none",
+                          open || isAnySubMenuItemActive(item.subMenuItems)
+                            ? "text-menuHighlightBlue"
+                            : "text-secondary",
+                          "group inline-flex items-center rounded-md text-base font-medium hover:text-menuHighlightBlue focus:outline-none",
                         )}
                       >
                         {item.label}
                         <ChevronDownIcon //arrow  for dropdown
                           className={classNames(
-                            open ? "text-menuHighlightBlue" : "text-secondary",
+                            open || isAnySubMenuItemActive(item.subMenuItems)
+                              ? "text-menuHighlightBlue"
+                              : "text-secondary",
                             "ml-2 h-5 w-5 group-hover:text-menuHighlightBlue",
                           )}
                           aria-hidden="true"
@@ -104,10 +134,10 @@ export const MainMenu = ({ items }) => {
                                   passHref
                                 >
                                   <a
-                                    className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
+                                    className={`-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50 ${isActive(subItem.destination) ? "text-menuHighlightBlue" : "text-primary"}`}
                                     onClick={handleMenuItemClick}
                                   >
-                                    <p className="text-base font-medium text-gray-900">
+                                    <p className="text-base font-medium">
                                       {subItem.label}
                                     </p>
                                   </a>
@@ -127,7 +157,10 @@ export const MainMenu = ({ items }) => {
                   href={item.destination}
                   passHref
                 >
-                  <a className="text-base font-medium text-secondary hover:text-menuHighlightBlue" onClick={handleMenuItemClick}>
+                  <a
+                    className={`text-base font-medium hover:text-menuHighlightBlue ${isActive(item.destination) ? "text-menuHighlightBlue" : "text-secondary"}`}
+                    onClick={handleMenuItemClick}
+                  >
                     {item.label}
                   </a>
                 </Link>
@@ -136,15 +169,20 @@ export const MainMenu = ({ items }) => {
           </Popover.Group>
           {/* //! Desktop end */}
 
-          {/* <div className="z-20 hidden items-center justify-end md:flex md:flex-1 lg:w-0"> */}
           <div className="z-20 items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link legacyBehavior href="#" passHref>
-              <a className="whitespace-nowrap text-base font-medium text-secondary hover:text-menuHighlightBlue" onClick={handleMenuItemClick}>
+              <a
+                className="whitespace-nowrap text-base font-medium text-secondary hover:text-menuHighlightBlue"
+                onClick={handleMenuItemClick}
+              >
                 Login
               </a>
             </Link>
             <Link legacyBehavior href="#" passHref>
-              <a className="ml-3 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-secondary shadow-sm hover:text-menuHighlightBlue" onClick={handleMenuItemClick}>
+              <a
+                className="ml-3 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-secondary shadow-sm hover:text-menuHighlightBlue"
+                onClick={handleMenuItemClick}
+              >
                 Join Now
               </a>
             </Link>
@@ -175,34 +213,52 @@ export const MainMenu = ({ items }) => {
               <div className="relative mt-6 flex-1">
                 <nav className="flex flex-col space-y-2">
                   {items.map((item) => (
-                    <div key={item.id}>
-                      <Link
-                        legacyBehavior
-                        key={item.id}
-                        href={item.destination || "#"}
-                        passHref
-                      >
-                        <a className="rounded-md p-2 text-base font-medium text-secondary hover:bg-menuHighlightBlue" onClick={handleMenuItemClick}>
-                          {item.label}
-                        </a>
-                      </Link>
-                      {item.subMenuItems.length > 0 && (
-                        <div className="space-y-1 pl-4">
-                          {item.subMenuItems.map((subItem) => (
-                            <Link
-                              key={subItem.id}
-                              href={subItem.destination || "#"}
-                              legacyBehavior
-                              passHref
-                            >
-                              <a className="group flex items-center rounded-md px-2 py-2 text-sm font-medium leading-5 text-secondary hover:bg-gray-100 focus:bg-primaryDark" onClick={handleMenuItemClick}>
-                                {subItem.label}
-                              </a>
-                            </Link>
-                          ))}
+                    <Fragment key={item.id}>
+                      {item.subMenuItems.length > 0 ? (
+                        <div onClick={() => toggleSubmenu(item.id)}>
+                          <a
+                            className={`rounded-md p-2 text-base font-medium ${isAnySubMenuItemActive(item.subMenuItems) ? "text-menuHighlightBlue" : "text-secondary"} flex items-center justify-between`}
+                          >
+                            {item.label}
+                            <ChevronDownIcon
+                              className={`h-5 w-5 transition-transform ${openSubmenu === item.id ? "rotate-180" : "rotate-0"}`}
+                            />
+                          </a>
+                          <div
+                            className={`space-y-1 pl-6 ${openSubmenu === item.id ? "" : "hidden"}`}
+                          >
+                            {item.subMenuItems.map((subItem) => (
+                              <Link
+                                legacyBehavior
+                                key={subItem.id}
+                                href={subItem.destination || "#"}
+                                passHref
+                              >
+                                <a
+                                  className={`block rounded-md px-2 py-2 text-sm font-medium leading-5 ${isActive(subItem.destination) ? "text-menuHighlightBlue" : "text-secondary"} `}
+                                  onClick={handleMenuItemClick}
+                                >
+                                  {subItem.label}
+                                </a>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
+                      ) : (
+                        <Link
+                          legacyBehavior
+                          href={item.destination || "#"}
+                          passHref
+                        >
+                          <a
+                            className={`rounded-md p-2 text-base font-medium ${isActive(item.destination) ? "text-menuHighlightBlue" : "text-secondary"} `}
+                            onClick={handleMenuItemClick}
+                          >
+                            {item.label}
+                          </a>
+                        </Link>
                       )}
-                    </div>
+                    </Fragment>
                   ))}
                 </nav>
               </div>
