@@ -47,7 +47,7 @@ export const MainMenu = ({ items }) => {
 
   return (
     <header
-      className="bg-white shadow-sm"
+      className="shadow-sm sticky z-50 top-0"
       style={{
         backgroundImage: "url('/images/asset-3.jpeg')",
         backgroundSize: "cover",
@@ -55,7 +55,7 @@ export const MainMenu = ({ items }) => {
       }}
     >
       <nav
-        className="mx-auto max-w-full px-4 sm:px-6 lg:px-8"
+        className=" mx-auto max-w-full px-4 sm:px-6 lg:px-8 "
         aria-label="Global"
       >
         <div className="flex items-center justify-between py-3 sm:py-5 md:justify-start md:space-x-5">

@@ -57,22 +57,25 @@ export const getMarginBottomClass = (marginBottom) => {
     "-5": "-mb-5", // if passing  - rem value
     "-2": "-mb-8",
     "-1": "-mb-1",
-    1: "mb-1",
-    2: "mb-2",
-    4: "mb-4",
-    6: "mb-6",
-    8: "mb-8",
-    "2rem": "mt-8",
-    10: "mb-10",
-    12: "mb-12",
-    16: "mb-16",
-    20: "mb-20",
-    24: "mb-24",
-    32: "mb-32",
-    40: "mb-40",
-    48: "mb-48",
-    56: "mb-56",
-    64: "mb-64",
+    "0rem": "", // No margin
+    "0.25rem": "mb-1", // 4px
+    "0.5rem": "mb-2", // 8px
+    "0.75rem": "mb-3", // 12px
+    "1rem": "mb-4", // 16px
+    "1.25rem": "mb-5", // 20px
+    "1.5rem": "mb-6", // 24px
+    "2rem": "mb-8", // 32px
+    "2.5rem": "mb-10", // 40px
+    "3rem": "mb-12", // 48px
+    "4rem": "mb-16", // 64px
+    "5rem": "mb-20", // 80px
+    "6rem": "mb-24", // 96px
+    "8rem": "mb-32", // 128px
+    "10rem": "mb-40", // 160px
+    "12rem": "mb-48", // 192px
+    "14rem": "mb-56", // 224px
+    "16rem": "mb-64", // 256px
+    // Add more as needed
   };
 
   return `${marginMap[marginBottom] || ""}`;

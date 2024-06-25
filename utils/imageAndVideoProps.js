@@ -1,4 +1,4 @@
-export const getOverlayColor = (overlayColorSlug = "primary") => {
+export const getOverlayColor = (overlayColorSlug = "") => {
   const overlayColorMap = {
     primary: "#002063",
     secondary: "#fbe6ba",

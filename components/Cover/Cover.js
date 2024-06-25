@@ -8,9 +8,10 @@ export const Cover = ({
   overlay,
   mobileHeight,
   desktopHeight,
+  hasParallax,
   id,
 }) => {
-  const color = getOverlayColor(overlay); // Example color: #002063
+  const color = getOverlayColor(overlay);
   const isMobile = useIsMobile();
   const router = useRouter();
 
@@ -20,31 +21,50 @@ export const Cover = ({
   };
   const imageStyle =
     router.pathname === "/" ? { objectPosition: "center top" } : {};
+  const imageClassName =
+    router.pathname === "/"
+      ? "object-cover mix-blend-soft-light"
+      : "object-fill"; //?
+
+  // console.log(hasParallax);
+
+  const parallaxClass = hasParallax ? "parallax" : "";
 
   return (
     <div
-      className="cov relative flex items-center justify-center text-white"
-      style={styles} // Apply inline style for height
+      className={`cover relative flex items-center justify-center text-white ${parallaxClass}`}
+      style={styles}
     >
-      <div className="absolute inset-0 z-0">
+      {hasParallax ? (
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${background})`,
+            backgroundAttachment: "fixed",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        ></div>
+      ) : (
         <Image
           alt="Cover"
           src={background}
           fill
           priority
-          className="object-cover mix-blend-soft-light"
-          style={imageStyle}
-        />
-        {/* Overlay to show only on the image */}
-        <div
-          className="absolute inset-0"
+          className="object-cover"
           style={{
-            backgroundColor: color,
-            opacity: 0.5,
-            // mixBlendMode: "overlay",
+            objectPosition: router.pathname === "/" ? "center top" : "initial",
           }}
         />
-      </div>
+      )}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundColor: color,
+          opacity: 0.5,
+        }}
+      ></div>
       <div className="z-10 max-w-7xl">{children}</div>
     </div>
   );

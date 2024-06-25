@@ -50,4 +50,10 @@
     /* Increase font size of arrows */
     /* font-size: 20px; */
   }
-  
+  .parallax {
+    overflow: hidden;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

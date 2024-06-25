@@ -4,6 +4,7 @@ import { CallToActionButton } from "components/CallToActionButton";
 import { Column } from "components/Column";
 import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
+import { Gallery } from "components/Gallery/Gallery";
 import { Heading } from "components/Heading";
 import { List } from "components/List";
 import Media_text from "components/Media_text/Media_text";
@@ -84,16 +85,6 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
-      // case "core/post-title": {
-      //   return (
-      //     <Heading //one of two
-      //       key={block.id}
-      //       level={block.attributes.level}
-      //       textAlign={block.attributes.textAlign}
-      //       content={block.attributes.content}
-      //     />
-      //   );
-      // }
       case "core/heading": {
         return (
           <Heading
@@ -104,6 +95,7 @@ export const BlockRenderer = ({ blocks }) => {
             color={
               block.attributes.textColor || block.attributes.style?.color?.text
             }
+            marginBottom={block.attributes.style?.spacing?.margin?.bottom}
           />
         );
       }
@@ -116,7 +108,7 @@ export const BlockRenderer = ({ blocks }) => {
             overlay={block.attributes.overlayColor}
             mobileHeight={block.attributes.layout.contentSize}
             desktopHeight={block.attributes.layout.wideSize}
-            // desktopHeight={block.attributes.minHeight + 'px'}
+            hasParallax={block.attributes.hasParallax}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Cover>
@@ -176,6 +168,16 @@ export const BlockRenderer = ({ blocks }) => {
           </Columns>
         );
       }
+      case "core/gallery": {
+        return (
+          <Gallery
+            key={block.id}
+            columns={block.attributes.columns || 3}
+            cropImages={block.attributes.imageCrop}
+            items={block.innerBlocks}
+          />
+        );
+      }
       case "core/column": {
         return (
           <Column
@@ -192,7 +194,6 @@ export const BlockRenderer = ({ blocks }) => {
             borderBottom={block.attributes.style?.border?.bottom?.width}
             borderBottomColor={block.attributes.style?.border?.bottom?.color}
             minHeight={block.attributes?.style?.spacing?.blockGap}
-
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Column>
