@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Children } from "react";
 import { useIsMobile } from "utils/useIsMobile";
 
 export default function MediaText({

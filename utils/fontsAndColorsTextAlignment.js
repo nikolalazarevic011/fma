@@ -11,7 +11,7 @@ export const getTextAlign = (textAlign = "left") => {
 export const getFontSizeForHeading = (level, isMobile) => {
   // Adjust level for mobile if necessary
   if (isMobile && level <= 5) {
-    level = Math.floor(level * 2) || 1; // Ensures there's a valid level, defaulting to 1 if calculation is zero
+    level = Math.floor(level + 1) || 1; // Ensures there's a valid level, defaulting to 1 if calculation is zero
   }
 
   const fontSizeMap = {

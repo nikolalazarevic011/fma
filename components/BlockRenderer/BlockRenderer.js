@@ -5,6 +5,7 @@ import { Column } from "components/Column";
 import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
 import { Gallery } from "components/Gallery/Gallery";
+import { Group } from "components/Group/Group";
 import { Heading } from "components/Heading";
 import { List } from "components/List";
 import Media_text from "components/Media_text/Media_text";
@@ -30,18 +31,48 @@ export const BlockRenderer = ({ blocks }) => {
           block.attributes.layout?.flexWrap === "nowrap"
         ) {
           return (
-            <div
+            <Group
               key={block.id}
               className="flex flex-row flex-nowrap items-center"
+              paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
+              borderBottomWidth={block.attributes.style?.border?.bottom?.width}
+              bottomBorderColor={block.attributes.style?.border?.bottom?.color}
             >
               <BlockRenderer blocks={block.innerBlocks} />
-            </div>
+            </Group>
+          );
+        }
+        if (
+          block.attributes.layout?.type === "flex" &&
+          block.attributes.layout?.orientation === "vertical" &&
+          block.attributes.layout?.justifyContent === "center"
+        ) {
+          return (
+            <Group
+              key={block.id}
+              className="flex flex-col flex-wrap items-center"
+              paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
+              borderBottomWidth={block.attributes.style?.border?.bottom?.width}
+              bottomBorderColor={block.attributes.style?.border?.bottom?.color}
+            >
+              <BlockRenderer blocks={block.innerBlocks} />
+            </Group>
           );
         }
         // Default BlockRenderer call for nested blocks
-        return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
+        return (
+          <Group
+            key={block.id}
+            paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
+            borderBottomWidth={block.attributes.style?.border?.bottom?.width}
+            bottomBorderColor={block.attributes.style?.border?.bottom?.color}
+          >
+            <BlockRenderer blocks={block.innerBlocks} />
+          </Group>
+        );
       }
       case "core/image": {
+        console.log(block.attributes.height);
         return (
           <div className="" key={block.id}>
             <Image
@@ -56,7 +87,7 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "acf/acfimage": {
         //more props inside
-        return <AcfImage block={block} />;
+        return <AcfImage block={block} key={block.id} />;
       }
       case "core/media-text": {
         //more props inside
@@ -117,10 +148,6 @@ export const BlockRenderer = ({ blocks }) => {
       case "core/buttons": {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
       }
-      // case "core/block": //ovako moze kad vracaju isto
-      // case "core/group": {
-      //   return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
-      // }
       case "core/paragraph": {
         return (
           <Paragraph

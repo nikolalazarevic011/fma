@@ -134,7 +134,7 @@ export const MainMenu = ({ items }) => {
                                   passHref
                                 >
                                   <a
-                                    className={`-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50 ${isActive(subItem.destination) ? "text-menuHighlightBlue" : "text-primary"}`}
+                                    className={`-m-3 flex items-start rounded-lg p-3 hover:text-menuHighlightBlue ${isActive(subItem.destination) ? "text-menuHighlightBlue" : "text-primary"}`}
                                     onClick={handleMenuItemClick}
                                   >
                                     <p className="text-base font-medium">

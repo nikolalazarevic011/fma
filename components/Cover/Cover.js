@@ -11,7 +11,7 @@ export const Cover = ({
   hasParallax,
   id,
 }) => {
-  const color = getOverlayColor(overlay);
+  const color = getOverlayColor(overlay) || 'transparent';
   const isMobile = useIsMobile();
   const router = useRouter();
 
@@ -19,14 +19,8 @@ export const Cover = ({
   const styles = {
     ...(isMobile ? { height: mobileHeight } : { height: desktopHeight }),
   };
-  const imageStyle =
-    router.pathname === "/" ? { objectPosition: "center top" } : {};
-  const imageClassName =
-    router.pathname === "/"
-      ? "object-cover mix-blend-soft-light"
-      : "object-fill"; //?
 
-  // console.log(hasParallax);
+  const opacity = 0.5;
 
   const parallaxClass = hasParallax ? "parallax" : "";
 
@@ -62,7 +56,7 @@ export const Cover = ({
         className="absolute inset-0 z-0"
         style={{
           backgroundColor: color,
-          opacity: 0.5,
+          opacity: opacity,
         }}
       ></div>
       <div className="z-10 max-w-7xl">{children}</div>
