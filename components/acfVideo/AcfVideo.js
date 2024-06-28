@@ -44,7 +44,7 @@ export const AcfVideo = ({
 
   };
 
-  // Convert string "1" or "0" to boolean
+  // Convert string "1" or "0" to boolean!
   const embed = isEmbed === "1";
 
   // Render video or iframe based on `isEmbed`
