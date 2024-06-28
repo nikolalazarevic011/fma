@@ -7,8 +7,11 @@
 import { useState, useEffect } from "react";
 export const useIsMobile = () => {
   // Default to mobile view if typically more mobile users
+  // const [isMobile, setIsMobile] = useState(
+  //   typeof window !== "undefined" ? window.innerWidth <= 435 : true,
+  // );
   const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth <= 435 : true,
+   false
   );
 
   useEffect(() => {
