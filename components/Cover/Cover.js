@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getOverlayColor } from "utils/imageAndVideoProps";
 import { useIsMobile } from "utils/useIsMobile";
+import { getBorderBottomWidthClass, getBorderColorClass } from "utils/border";
 import { useRouter } from "next/router";
 export const Cover = ({
   children,
@@ -10,8 +11,10 @@ export const Cover = ({
   desktopHeight,
   hasParallax,
   id,
+  borderBottomWidth,
+  bottomBorderColor,
 }) => {
-  const color = getOverlayColor(overlay) || 'transparent';
+  const color = getOverlayColor(overlay) || "transparent";
   const isMobile = useIsMobile();
   const router = useRouter();
 
@@ -26,7 +29,7 @@ export const Cover = ({
 
   return (
     <div
-      className={`cover relative flex items-center justify-center text-white ${parallaxClass}`}
+      className={`cover relative flex items-center justify-center text-white ${getBorderBottomWidthClass(borderBottomWidth)} ${getBorderColorClass(bottomBorderColor)} ${parallaxClass}`}
       style={styles}
     >
       {hasParallax ? (

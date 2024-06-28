@@ -1,20 +1,28 @@
-import React, { useState, useEffect } from "react";
+//consider this
+/*Hybrid Approach: For scenarios where server-side rendering is essential,
+ and you need to predict device type, consider using user-agent detection
+  on the server to set an initial guess and then refine it on the client.
+  This method, however, can be trickier and more error-prone due to the diversity and inconsistency of user-agent strings. */
 
-// Typically, hooks are named with "use" prefix to follow React conventions
+import { useState, useEffect } from "react";
 export const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  // Default to mobile view if typically more mobile users
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= 435 : true,
+  );
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 435); // Update based on current width
+      setIsMobile(window.innerWidth <= 435);
     };
 
     handleResize(); // Set initial value
-
     window.addEventListener("resize", handleResize); // Setup event listener
 
-    return () => window.removeEventListener("resize", handleResize); // Cleanup event listener
-  }, []); // Empty dependency array ensures this effect only runs on mount and unmount
+    return () => {
+      window.removeEventListener("resize", handleResize); // Cleanup event listener
+    };
+  }, []);
 
   return isMobile;
 };

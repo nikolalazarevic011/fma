@@ -10,7 +10,9 @@ export const Group = ({
   // console.log(paddingBottom);
   return (
     <div
-      className={`gro mb-2 ${getPaddingBottomClass(paddingBottom)} ${getBorderBottomWidthClass(borderBottomWidth)} ${getBorderColorClass(bottomBorderColor)}`}
+      className={`gro mb-2 ${getPaddingBottomClass(paddingBottom)}
+       ${getBorderBottomWidthClass(borderBottomWidth)} 
+       ${getBorderColorClass(bottomBorderColor)}`}
     >
       <div>{children}</div>
     </div>

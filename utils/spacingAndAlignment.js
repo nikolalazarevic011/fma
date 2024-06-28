@@ -81,7 +81,3 @@ export const getMarginBottomClass = (marginBottom) => {
   return `${marginMap[marginBottom] || ""}`;
 };
 
-export const getHeightClass = (height) => {
-  // Returns a Tailwind CSS class for height; defaults to 'h-auto' if no height is specified
-  return height ? `h-[${height}px]` : "h-auto";
-};

@@ -140,6 +140,8 @@ export const BlockRenderer = ({ blocks }) => {
             mobileHeight={block.attributes.layout.contentSize}
             desktopHeight={block.attributes.layout.wideSize}
             hasParallax={block.attributes.hasParallax}
+            borderBottomWidth={block.attributes.style?.border?.bottom?.width}
+            bottomBorderColor={block.attributes.style?.border?.bottom?.color}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Cover>
@@ -245,7 +247,8 @@ export const BlockRenderer = ({ blocks }) => {
           <AcfVideo
             key={block.id}
             src={block.attributes.data.url}
-            height={block.attributes.data.height}
+            isEmbed={block.attributes.data.is_url_embed}
+            heightProp={block.attributes.data.height}
             controls={block.attributes.data.show_controls}
           />
         );
