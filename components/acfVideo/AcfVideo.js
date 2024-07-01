@@ -37,11 +37,8 @@ export const AcfVideo = ({
 
   const styles = {
     height: responsiveHeight,
-  };
-  const stylesIFrame = {
-    height: responsiveHeight,
-    width: isMobile ? "100%" : "1118px"  // Conditional width based on isMobile
 
+    width: isMobile ? "360px" : "1118px",
   };
 
   // Convert string "1" or "0" to boolean!
@@ -58,8 +55,8 @@ export const AcfVideo = ({
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          style={styles}
           className="h-full w-full object-cover"
-          style={stylesIFrame}
         />
       );
     } else {
@@ -71,9 +68,9 @@ export const AcfVideo = ({
           autoPlay={autoplay}
           loop={loop}
           muted={muted}
+          style={styles}
           className="h-full w-full object-cover"
           {...props}
-          style={styles}
         >
           Your browser does not support the video tag.
         </video>
@@ -81,11 +78,11 @@ export const AcfVideo = ({
     }
   };
 
-  return (
-    <div className="relative w-full overflow-hidden" >
+  return isMobile !== undefined ? (
+    <div className="relative w-full overflow-hidden">
       {renderVideoContent()}
     </div>
-  );
+  ) : null; // Prevent rendering until isMobile is determined
 };
 
 AcfVideo.propTypes = {
@@ -96,5 +93,5 @@ AcfVideo.propTypes = {
   loop: PropTypes.bool,
   className: PropTypes.string,
   heightProp: PropTypes.string,
-  isembed: PropTypes.string,
+  isEmbed: PropTypes.string,
 };
