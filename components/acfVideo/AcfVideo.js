@@ -37,8 +37,7 @@ export const AcfVideo = ({
 
   const styles = {
     height: responsiveHeight,
-
-    width: isMobile ? "360px" : "1118px",
+    width: isMobile ? "370px" : "1118px",
   };
 
   // Convert string "1" or "0" to boolean!
@@ -56,7 +55,7 @@ export const AcfVideo = ({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           style={styles}
-          className="h-full w-full object-cover"
+          className="h-full w-full mx-auto object-cover pb-5"
         />
       );
     } else {
@@ -69,7 +68,7 @@ export const AcfVideo = ({
           loop={loop}
           muted={muted}
           style={styles}
-          className="h-full w-full object-cover"
+          className="h-full w-full mx-auto object-cover"
           {...props}
         >
           Your browser does not support the video tag.

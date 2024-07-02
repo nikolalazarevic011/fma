@@ -17,6 +17,10 @@ export const MainMenu = ({ items }) => {
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const router = useRouter();
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   const toggleSubmenu = (id) => {
     if (items.find((item) => item.id === id).subMenuItems.length > 0) {
       setOpenSubmenu(openSubmenu === id ? null : id);
@@ -47,7 +51,7 @@ export const MainMenu = ({ items }) => {
 
   return (
     <header
-      className="shadow-sm sticky z-50 top-0"
+      className="sticky top-0 z-50 shadow-sm"
       style={{
         backgroundImage: "url('/images/asset-3.jpeg')",
         backgroundSize: "cover",
@@ -55,7 +59,7 @@ export const MainMenu = ({ items }) => {
       }}
     >
       <nav
-        className=" mx-auto max-w-full px-4 sm:px-6 lg:px-8 "
+        className="mx-auto max-w-full px-4 sm:px-6 lg:px-8"
         aria-label="Global"
       >
         <div className="flex items-center justify-between py-3 sm:py-5 md:justify-start md:space-x-5">
@@ -80,7 +84,7 @@ export const MainMenu = ({ items }) => {
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-md p-2 text-secondary opacity-100"
-              onClick={() => setMobileMenuOpen(true)}
+              onClick={toggleMobileMenu}
             >
               <span className="sr-only">Open menu</span>
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -199,12 +203,14 @@ export const MainMenu = ({ items }) => {
         >
           <div className="fixed inset-0 z-40 overflow-hidden">
             <Dialog.Panel className="absolute inset-0 h-full w-full max-w-xs bg-primary p-4 opacity-90">
-              <div className="flex items-center justify-between text-secondary">
+              <div
+                className="flex items-center justify-between text-secondary"
+                onClick={toggleMobileMenu}
+              >
                 <Dialog.Title>Menu</Dialog.Title>
                 <button
                   type="button"
                   className="inline-flex items-center justify-center rounded-md p-2 text-background hover:bg-gray-100 hover:text-gray-500"
-                  onClick={() => setMobileMenuOpen(false)}
                 >
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   <span className="sr-only">Close menu</span>

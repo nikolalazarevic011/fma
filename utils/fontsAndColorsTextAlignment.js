@@ -30,7 +30,7 @@ export const getFontSizeForHeading = (level, isMobile) => {
   return fontSizeMap[level] || fontSizeMap[6]; // Use fontSizeMap[6] as a default if level is out of bounds
 };
 
-export const getColorClass = (color = "primary") => {
+export const getColorClass = (color = "background") => {
   const colorMap = {
     primary: "text-primary",
     secondary: "text-secondary",

@@ -30,14 +30,17 @@ export const ButtonLink = ({
   return (
     <Link href={href} legacyBehavior>
       <a
-        className={`my-2 inline-block cursor-pointer rounded-md border-2 px-3 py-2 font-bold uppercase ${
+        className={`my-2 mx-1 inline-block cursor-pointer rounded-md border-2 px-3 py-2 font-bold uppercase ${
           fullWidth ? "w-full text-center" : ""
-        } ${isTransparent ? 'hover:bg-opacity-20' : 'hover:bg-opacity-10'}`}
+        } ${isTransparent ? "hover:bg-opacity-20" : "hover:bg-opacity-10"}`}
         style={{
-          color: isTransparent ?  buttonColor : "white",
+          color: isTransparent ? buttonColor : "white",
           borderColor: buttonColor,
           backgroundColor: isTransparent ? "transparent" : buttonColor,
           transition: "background-color 0.3s ease",
+          whiteSpace: "normal", // Allow wrapping
+          overflow: "visible", // Make sure overflow text is visible
+          textOverflow: "clip", // Clip the text visually if it overflows
         }}
         {...linkProps}
       >
