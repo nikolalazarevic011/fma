@@ -1,3 +1,4 @@
+import { AcfCustomHtml } from "components/AcfCustomHtml";
 import { AcfImage } from "components/AcfImage";
 import AcfSlider from "components/AcfSlider/AcfSlider";
 import { CallToActionButton } from "components/CallToActionButton";
@@ -260,6 +261,16 @@ export const BlockRenderer = ({ blocks }) => {
             url={block.attributes.data?.external_url?.url}
             transparency={block.attributes.data?.transparent_button}
             openInNewTab={block.attributes.data?.external_url?.target}
+          />
+        );
+      }
+      case "acf/acfcustomhtml": {
+        return (
+          <AcfCustomHtml
+            key={block.id}
+            //? src or customHtml
+            customHtml={block.attributes?.data?.custom_html}
+            src={'https://form.jotform.com/71946782144969'}
           />
         );
       }
