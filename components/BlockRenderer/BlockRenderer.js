@@ -4,6 +4,7 @@ import { CallToActionButton } from "components/CallToActionButton";
 import { Column } from "components/Column";
 import { Columns } from "components/Columns";
 import { Cover } from "components/Cover";
+import { Details } from "components/Details";
 import { Gallery } from "components/Gallery/Gallery";
 import { Group } from "components/Group/Group";
 import { Heading } from "components/Heading";
@@ -33,7 +34,7 @@ export const BlockRenderer = ({ blocks }) => {
           return (
             <Group
               key={block.id}
-              className="flex flex-row flex-nowrap items-center"
+              className="flex flex-row items-center flex-nowrap"
               paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
               borderBottomWidth={block.attributes.style?.border?.bottom?.width}
               bottomBorderColor={block.attributes.style?.border?.bottom?.color}
@@ -72,7 +73,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "core/image": {
-        console.log(block.attributes.height);
+        // console.log(block.attributes.height);
         return (
           <div className="" key={block.id}>
             <Image
@@ -223,11 +224,31 @@ export const BlockRenderer = ({ blocks }) => {
             borderBottom={block.attributes.style?.border?.bottom?.width}
             borderBottomColor={block.attributes.style?.border?.bottom?.color}
             minHeight={block.attributes?.style?.spacing?.blockGap}
+            shadow={block.attributes?.style?.shadow}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Column>
         );
       }
+      case "core/details": {
+        const headBlock = block.innerBlocks.find(
+          (b) => b.name === "core/heading",
+        );
+        const paraBlocks = block.innerBlocks.filter(
+          (b) => b.name === "core/paragraph",
+        ); // Collect all paragraph blocks
+
+        return (
+          <Details
+            key={block.id}
+            headTitle={headBlock?.attributes.content}
+            headLevel={headBlock?.attributes.level}
+            headColor={headBlock?.attributes.textColor}
+            paraBlocks={paraBlocks} // Pass all paragraphs as an array
+          />
+        );
+      }
+
       case "acf/ctabutton": {
         return (
           <CallToActionButton
@@ -250,6 +271,7 @@ export const BlockRenderer = ({ blocks }) => {
             isEmbed={block.attributes.data.is_url_embed}
             heightProp={block.attributes.data.height}
             controls={block.attributes.data.show_controls}
+            autoplay={block.attributes.data.autoplay}
           />
         );
       }

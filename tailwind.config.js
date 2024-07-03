@@ -9,24 +9,25 @@ module.exports = {
     extend: {
       height: {
         // Enables any arbitrary value
-        '590': '590px'
+        590: "590px",
       },
       borderWidth: {
         1: "1px",
         2: "2px",
         3: "3px",
         4: "4px",
-        5: "5px", 
-        6: "6px", 
-        8: "8px", 
-        10: "10px", 
-        12: "12px", 
+        5: "5px",
+        6: "6px",
+        8: "8px",
+        10: "10px",
+        12: "12px",
       },
       colors: {
         primary: "#002063",
-        secondary: "#fbe6ba", //gold color
         primaryLight: "#248acc",
         primaryDark: "#002b4e",
+        secondary: "#fbe6ba", //gold color
+        secondaryDark: "#da9b18",
         headingRed: "#F12006",
         background: "#ffffff",
         menuHighlightBlue: "#1fffff",

@@ -11,15 +11,15 @@ export const Column = ({
   borderBottom,
   borderBottomColor,
   minHeight,
+  shadow,
 }) => {
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
   const widthStyle = width
     ? { minWidth: width, flexGrow: 1 }
     : { flexGrow: 1, flexBasis: 0 };
   const minHeightStyle = !isMobile && minHeight ? { minHeight } : {};
-
   return (
     <div
       style={{
@@ -28,7 +28,7 @@ export const Column = ({
         ...backgroundColorStyle,
         ...minHeightStyle,
       }}
-      className={`col px-2 py-2 sm:py-2 ${getBorderBottomWidthClass(borderBottom)} ${getBorderColorClass(borderBottomColor)}`}
+      className={`col px-2 py-2 sm:py-2 ${getBorderBottomWidthClass(borderBottom)} ${getBorderColorClass(borderBottomColor)} `}
     >
       {children}
     </div>

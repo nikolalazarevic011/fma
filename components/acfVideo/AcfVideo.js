@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useIsMobile } from "utils/useIsMobile";
-import { getHeightClass } from "utils/spacingAndAlignment";
+
 
 export const AcfVideo = ({
   src,
@@ -19,6 +19,7 @@ export const AcfVideo = ({
   const numericHeight = Number(heightProp); // Convert heightProp to a number
 
   const showControls = () => controls !== "0";
+  const showAutoplay = () => autoplay !== "0";
 
   // console.log(isMobile);
   // Helper function to extract YouTube video ID from URL
@@ -35,9 +36,12 @@ export const AcfVideo = ({
       ? `${heightProp}px` // Use full height on non-mobile
       : `${heightProp / 2}px`; // Use half height on mobile
 
-  const styles = {
+  const stylesIframe = {
     height: responsiveHeight,
     width: isMobile ? "370px" : "1118px",
+  };
+  const styles = {
+    height: responsiveHeight,
   };
 
   // Convert string "1" or "0" to boolean!
@@ -54,7 +58,7 @@ export const AcfVideo = ({
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          style={styles}
+          style={stylesIframe}
           className="h-full w-full mx-auto object-cover pb-5"
         />
       );
@@ -64,7 +68,7 @@ export const AcfVideo = ({
           src={src}
           poster={poster}
           controls={showControls()}
-          autoPlay={autoplay}
+          autoPlay={showAutoplay()}
           loop={loop}
           muted={muted}
           style={styles}
