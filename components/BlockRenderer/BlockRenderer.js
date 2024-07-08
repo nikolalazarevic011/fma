@@ -15,6 +15,8 @@ import { Paragraph } from "components/Paragraph";
 import { AcfVideo } from "components/acfVideo";
 import Image from "next/image";
 import { theme } from "theme";
+import { getBorderBottomWidthClass, getBorderColorClass } from "utils/border";
+import { getPaddingBottomClass } from "utils/padding";
 
 export const BlockRenderer = ({ blocks }) => {
   if (!Array.isArray(blocks)) {
@@ -27,44 +29,14 @@ export const BlockRenderer = ({ blocks }) => {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
       }
       case "core/group": {
-        // Check for specific layout attributes and apply a row layout if conditions match
-        if (
-          block.attributes.layout?.type === "flex" &&
-          block.attributes.layout?.flexWrap === "nowrap"
-        ) {
-          return (
-            <Group
-              key={block.id}
-              className="flex flex-row items-center flex-nowrap"
-              paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
-              borderBottomWidth={block.attributes.style?.border?.bottom?.width}
-              bottomBorderColor={block.attributes.style?.border?.bottom?.color}
-            >
-              <BlockRenderer blocks={block.innerBlocks} />
-            </Group>
-          );
-        }
-        if (
-          block.attributes.layout?.type === "flex" &&
-          block.attributes.layout?.orientation === "vertical" &&
-          block.attributes.layout?.justifyContent === "center"
-        ) {
-          return (
-            <Group
-              key={block.id}
-              className="flex flex-col flex-wrap items-center"
-              paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
-              borderBottomWidth={block.attributes.style?.border?.bottom?.width}
-              bottomBorderColor={block.attributes.style?.border?.bottom?.color}
-            >
-              <BlockRenderer blocks={block.innerBlocks} />
-            </Group>
-          );
-        }
-        // Default BlockRenderer call for nested blocks
+        const { layout } = block.attributes;
+        const flexClass =
+          layout.orientation === "horizontal" ? "flex-row" : "flex-col";
+
         return (
           <Group
             key={block.id}
+            className={`flex ${flexClass} items-center ${getPaddingBottomClass(layout.paddingBottom)} ${getBorderBottomWidthClass(layout.borderBottomWidth)} ${getBorderColorClass(layout.bottomBorderColor)}`}
             paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
             borderBottomWidth={block.attributes.style?.border?.bottom?.width}
             bottomBorderColor={block.attributes.style?.border?.bottom?.color}
@@ -270,7 +242,7 @@ export const BlockRenderer = ({ blocks }) => {
             key={block.id}
             //? src or customHtml
             customHtml={block.attributes?.data?.custom_html}
-            src={'https://form.jotform.com/71946782144969'}
+            src={"https://form.jotform.com/71946782144969"}
           />
         );
       }
