@@ -42,7 +42,7 @@ export const Columns = ({
       <div
         className={`cols mx-auto max-w-6xl ${getBorderRadiusClass(borderRadius)} ${
           isStackedOnMobile ? "block md:flex" : "flex"
-        } ${verticalAlignment ?getAlignmentClass(verticalAlignment) : ''} ${!isMobile && getBorderWidthClass(borderWidth)} ${getBorderColorClass(borderColor)} `}
+        } ${verticalAlignment ? getAlignmentClass(verticalAlignment) : ""} ${!isMobile && getBorderWidthClass(borderWidth)} ${getBorderColorClass(borderColor)} `}
       >
         {children}
       </div>

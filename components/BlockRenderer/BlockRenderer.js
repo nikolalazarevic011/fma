@@ -29,22 +29,27 @@ export const BlockRenderer = ({ blocks }) => {
         return <BlockRenderer key={block.id} blocks={block.innerBlocks} />;
       }
       case "core/group": {
-        const { layout } = block.attributes;
+        const { style } = block.attributes;
         const flexClass =
-          layout.orientation === "horizontal" ? "flex-row" : "flex-col";
+          block.attributes.layout.orientation === "horizontal"
+            ? "flex-row"
+            : "flex-col";
+
+        // Extract padding and border styles correctly based on your JSON structure
+        const paddingBottom = style?.spacing?.padding?.bottom;
+        const borderBottomWidth = style?.border?.bottom?.width;
+        const bottomBorderColor = style?.border?.bottom?.color;
 
         return (
           <Group
             key={block.id}
-            className={`flex ${flexClass} items-center ${getPaddingBottomClass(layout.paddingBottom)} ${getBorderBottomWidthClass(layout.borderBottomWidth)} ${getBorderColorClass(layout.bottomBorderColor)}`}
-            paddingBottom={block.attributes.style?.spacing?.padding?.bottom}
-            borderBottomWidth={block.attributes.style?.border?.bottom?.width}
-            bottomBorderColor={block.attributes.style?.border?.bottom?.color}
+            className={`flex ${flexClass} items-center ${getPaddingBottomClass(paddingBottom)} ${getBorderBottomWidthClass(borderBottomWidth)} ${getBorderColorClass(bottomBorderColor)}`}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Group>
         );
       }
+
       case "core/image": {
         // console.log(block.attributes.height);
         return (

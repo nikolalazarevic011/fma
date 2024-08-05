@@ -1,4 +1,3 @@
-// import { BlockRenderer } from "components/BlockRenderer";
 import { gql } from "@apollo/client";
 import { cleanAndTransformBlocks } from "utils/cleanAndTransformBlocks";
 import client from "client";
