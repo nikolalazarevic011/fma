@@ -56,7 +56,7 @@ export const getPageStaticProps = async (context) => {
         }
       }
     `,
-    variables: {  //lek12 
+    variables: {  //lection 12 , 22
       uri,
     },
   });

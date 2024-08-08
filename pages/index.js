@@ -1,6 +1,12 @@
+import { BlockRenderer } from "components/BlockRenderer";
 import { getPageStaticProps } from "utils/getPageStaticProps";
-import { Page } from "components/Page";
 
-export default  Page
+export default function Home(props) {
+  return (
+    <div>
+      <BlockRenderer blocks={props.blocks} /> {/* Page content */}
+    </div>
+  );
+}
 
-export const getStaticProps = getPageStaticProps
+export const getStaticProps = getPageStaticProps;

@@ -12,7 +12,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const MainMenu = ({ items }) => {
+export const MainMenu = ({ items = []}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const router = useRouter();
@@ -49,6 +49,8 @@ export const MainMenu = ({ items }) => {
     return subMenuItems.some((subItem) => isActive(subItem.destination));
   };
 
+  if (!items.length) return null; // Render nothing if items is empty
+
   return (
     <header
       className="sticky top-0 z-50 shadow-sm"
@@ -59,7 +61,7 @@ export const MainMenu = ({ items }) => {
       }}
     >
       <nav
-        className="mx-auto max-w-full px-4 sm:px-6 lg:px-8"
+        className="max-w-full px-4 mx-auto sm:px-6 lg:px-8"
         aria-label="Global"
       >
         <div className="flex items-center justify-between py-3 sm:py-5 md:justify-start md:space-x-5">
@@ -83,11 +85,11 @@ export const MainMenu = ({ items }) => {
           <div className="-my-2 -mr-2 md:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-secondary opacity-100"
+              className="inline-flex items-center justify-center p-2 rounded-md opacity-100 text-secondary"
               onClick={toggleMobileMenu}
             >
               <span className="sr-only">Open menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+              <Bars3Icon className="w-6 h-6" aria-hidden="true" />
             </button>
           </div>
           {/* //! Hamburger menu end */}
@@ -127,9 +129,9 @@ export const MainMenu = ({ items }) => {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 translate-y-1"
                       >
-                        <Popover.Panel className="absolute z-50 -ml-4 mt-3 w-screen max-w-md transform px-2 sm:px-0 lg:left-1/2 lg:-translate-x-1/2">
+                        <Popover.Panel className="absolute z-50 w-screen max-w-md px-2 mt-3 -ml-4 transform sm:px-0 lg:left-1/2 lg:-translate-x-1/2">
                           <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                            <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                            <div className="relative grid gap-6 px-5 py-6 bg-white sm:gap-8 sm:p-8">
                               {item.subMenuItems.map((subItem) => (
                                 <Link
                                   legacyBehavior
@@ -174,17 +176,17 @@ export const MainMenu = ({ items }) => {
           {/* //! Desktop end */}
 
           <div className="z-20 items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link legacyBehavior href="#" passHref>
+            <Link legacyBehavior href="/login/" passHref>
               <a
-                className="whitespace-nowrap text-base font-medium text-secondary hover:text-menuHighlightBlue"
+                className="text-base font-medium whitespace-nowrap text-secondary hover:text-menuHighlightBlue"
                 onClick={handleMenuItemClick}
               >
                 Login
               </a>
             </Link>
-            <Link legacyBehavior href="#" passHref>
+            <Link legacyBehavior href="/register/" passHref>
               <a
-                className="ml-3 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent px-4 py-2 text-base font-medium text-secondary shadow-sm hover:text-menuHighlightBlue"
+                className="inline-flex items-center justify-center px-4 py-2 ml-3 text-base font-medium border border-transparent rounded-md shadow-sm whitespace-nowrap text-secondary hover:text-menuHighlightBlue"
                 onClick={handleMenuItemClick}
               >
                 Join Now
@@ -202,7 +204,7 @@ export const MainMenu = ({ items }) => {
           onClose={setMobileMenuOpen}
         >
           <div className="fixed inset-0 z-40 overflow-hidden">
-            <Dialog.Panel className="absolute inset-0 h-full w-full max-w-xs bg-primary p-4 opacity-90">
+            <Dialog.Panel className="absolute inset-0 w-full h-full max-w-xs p-4 bg-primary opacity-90">
               <div
                 className="flex items-center justify-between text-secondary"
                 onClick={toggleMobileMenu}
@@ -210,13 +212,13 @@ export const MainMenu = ({ items }) => {
                 <Dialog.Title>Menu</Dialog.Title>
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center rounded-md p-2 text-background hover:bg-gray-100 hover:text-gray-500"
+                  className="inline-flex items-center justify-center p-2 rounded-md text-background hover:bg-gray-100 hover:text-gray-500"
                 >
-                  <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                  <XMarkIcon className="w-6 h-6" aria-hidden="true" />
                   <span className="sr-only">Close menu</span>
                 </button>
               </div>
-              <div className="relative mt-6 flex-1">
+              <div className="relative flex-1 mt-6">
                 <nav className="flex flex-col space-y-2">
                   {items.map((item) => (
                     <Fragment key={item.id}>

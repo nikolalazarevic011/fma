@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import { useRouter } from "next/router";
 
-const LoginPage = () => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+const LoginPage = ({}) => {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
 
@@ -11,10 +11,10 @@ const LoginPage = () => {
     e.preventDefault();
     setError(null);
 
-    const res = await fetch('/api/login', {
-      method: 'POST',
+    const res = await fetch("/api/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ login, password }),
     });
@@ -23,8 +23,8 @@ const LoginPage = () => {
 
     if (res.ok) {
       // Save user data in local storage or context for authenticated state
-      localStorage.setItem('user', JSON.stringify(data.user));
-      router.push('/'); // Redirect to home page or another protected route
+      localStorage.setItem("user", JSON.stringify(data.user));
+      router.push("/"); // Redirect to home page or another protected route
     } else {
       setError(data.message);
     }

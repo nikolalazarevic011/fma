@@ -1,11 +1,15 @@
-import { gql } from "@apollo/client";
-import { cleanAndTransformBlocks } from "utils/cleanAndTransformBlocks";
-import client from "client";
-import { getPageStaticProps } from "utils/getPageStaticProps";
 import { BlockRenderer } from "components/BlockRenderer";
-import { Page } from "components/Page";
+import { getPageStaticProps } from "utils/getPageStaticProps";
+import { gql } from "@apollo/client";
+import client from "client";
 
-export default Page;
+export default function Page(props) {
+  return (
+    <div>
+      <BlockRenderer blocks={props.blocks} /> {/* Page content */}
+    </div>
+  );
+}
 
 export const getStaticProps = getPageStaticProps;
 
@@ -24,7 +28,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: data.pages.nodes
-      .filter((page) => page.uri !== "/") //taking home page out, cuz it's already in index.js
+      .filter((page) => page.uri !== "/") // Exclude home page
       .map((page) => ({
         params: {
           slug: page.uri.substring(1, page.uri.length - 1).split("/"),
