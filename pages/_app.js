@@ -16,6 +16,29 @@ function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
 
+  //route protection for users without paid membership
+  useEffect(() => {
+    const handleRouteChangeStart = (url) => {
+      const user = localStorage.getItem("user");
+      const membershipId = localStorage.getItem("membershipId");
+
+      // Check if the route starts with /members and the user is not allowed
+      if (url.startsWith("/members") && membershipId !== "2") {
+        // Redirect to /applications/join-fma
+        router.push("/applications/join-fma");
+      }
+    };
+
+    // Add event listener for route changes
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+    };
+  }, [router]);
+
+  //Getting data from the server for main menu and footer when going to auth pages (login, register)
   useEffect(() => {
     const handleRouteChangeComplete = async () => {
       try {

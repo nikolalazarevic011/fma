@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition, Popover } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -12,11 +12,27 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const MainMenu = ({ items = []}) => {
+export const MainMenu = ({ items = [] }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const router = useRouter();
 
+  useEffect(() => {
+    // Check if user data is in localStorage
+    const user = localStorage.getItem("user");
+    setIsLoggedIn(!!user); // Set to true if user exists, otherwise false
+  }, []);
+
+  const handleLogout = () => {
+    // Clear user data from localStorage on logout
+    localStorage.removeItem("user");
+    localStorage.removeItem("membershipId");
+    localStorage.removeItem("authToken");
+    setIsLoggedIn(false);
+    window.location.href = "/"; // Redirect to home after logout
+  };
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -80,7 +96,6 @@ export const MainMenu = ({ items = []}) => {
               </a>
             </Link>
           </div> */}
-
           {/* //! Hamburger menu */}
           <div className="-my-2 -mr-2 md:hidden">
             <button
@@ -93,7 +108,6 @@ export const MainMenu = ({ items = []}) => {
             </button>
           </div>
           {/* //! Hamburger menu end */}
-
           {/* //! Desktop */}
           <Popover.Group as="nav" className="z-20 hidden space-x-5 md:flex">
             {items.map((item) =>
@@ -174,25 +188,32 @@ export const MainMenu = ({ items = []}) => {
             )}
           </Popover.Group>
           {/* //! Desktop end */}
-
+          
+          {/* LOGIN */}
           <div className="z-20 items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link legacyBehavior href="/login/" passHref>
+            {isLoggedIn ? (
               <a
-                className="text-base font-medium whitespace-nowrap text-secondary hover:text-menuHighlightBlue"
-                onClick={handleMenuItemClick}
+                className="text-base font-medium cursor-pointer whitespace-nowrap text-secondary hover:text-menuHighlightBlue"
+                onClick={handleLogout}
               >
-                Login
+                Logout
               </a>
-            </Link>
-            <Link legacyBehavior href="/register/" passHref>
-              <a
-                className="inline-flex items-center justify-center px-4 py-2 ml-3 text-base font-medium border border-transparent rounded-md shadow-sm whitespace-nowrap text-secondary hover:text-menuHighlightBlue"
-                onClick={handleMenuItemClick}
-              >
-                Join Now
-              </a>
-            </Link>
+            ) : (
+              <>
+                <Link legacyBehavior href="/login/" passHref>
+                  <a className="text-base font-medium whitespace-nowrap text-secondary hover:text-menuHighlightBlue">
+                    Login
+                  </a>
+                </Link>
+                <Link legacyBehavior href="/register/" passHref>
+                  <a className="inline-flex items-center justify-center px-4 py-2 ml-3 text-base font-medium border border-transparent rounded-md shadow-sm whitespace-nowrap text-secondary hover:text-menuHighlightBlue">
+                    Join Now
+                  </a>
+                </Link>
+              </>
+            )}
           </div>
+          
         </div>
       </nav>
 
