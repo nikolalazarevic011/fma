@@ -16,6 +16,30 @@ function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
 
+  // Redirect logged-in users away from /login and /register
+  useEffect(() => {
+    const handleRedirectIfLoggedIn = () => {
+      const user = localStorage.getItem("user");
+
+      if (
+        user &&
+        (router.pathname === "/login" || router.pathname === "/register")
+      ) {
+        router.push("/"); // Redirect to homepage if logged in
+      }
+    };
+
+    handleRedirectIfLoggedIn();
+
+    // Also listen for route changes
+    router.events.on("routeChangeComplete", handleRedirectIfLoggedIn);
+
+    // Cleanup the event listener
+    return () => {
+      router.events.off("routeChangeComplete", handleRedirectIfLoggedIn);
+    };
+  }, [router]);
+
   //route protection for users without paid membership
   useEffect(() => {
     const handleRouteChangeStart = (url) => {
@@ -38,7 +62,7 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-  //Getting data from the server for main menu and footer when going to auth pages (login, register)
+  // Fetch menu data on route change
   useEffect(() => {
     const handleRouteChangeComplete = async () => {
       try {

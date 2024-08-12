@@ -20,7 +20,28 @@ export const MainMenu = ({ items = [] }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // Check if user data is in localStorage
+    const handleLoginStatusChange = () => {
+      const user = localStorage.getItem("user");
+      setIsLoggedIn(!!user); // Set to true if user exists, otherwise false
+    };
+
+    // Check login status initially
+    handleLoginStatusChange();
+
+    // Listen for custom login status change event
+    window.addEventListener("login-status-change", handleLoginStatusChange);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener(
+        "login-status-change",
+        handleLoginStatusChange,
+      );
+    };
+  }, []);
+
+  // Check if user data is in localStorage, good for accident refresh?
+  useEffect(() => {
     const user = localStorage.getItem("user");
     setIsLoggedIn(!!user); // Set to true if user exists, otherwise false
   }, []);
@@ -31,6 +52,7 @@ export const MainMenu = ({ items = [] }) => {
     localStorage.removeItem("membershipId");
     localStorage.removeItem("authToken");
     setIsLoggedIn(false);
+    window.dispatchEvent(new Event("login-status-change"));
     window.location.href = "/"; // Redirect to home after logout
   };
   const toggleMobileMenu = () => {
@@ -188,16 +210,18 @@ export const MainMenu = ({ items = [] }) => {
             )}
           </Popover.Group>
           {/* //! Desktop end */}
-          
+
           {/* LOGIN */}
           <div className="z-20 items-center justify-end md:flex md:flex-1 lg:w-0">
             {isLoggedIn ? (
-              <a
-                className="text-base font-medium cursor-pointer whitespace-nowrap text-secondary hover:text-menuHighlightBlue"
-                onClick={handleLogout}
-              >
-                Logout
-              </a>
+              <>
+                <a
+                  className="text-base font-medium cursor-pointer whitespace-nowrap text-secondary hover:text-menuHighlightBlue"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </a>
+              </>
             ) : (
               <>
                 <Link legacyBehavior href="/login/" passHref>
@@ -213,7 +237,6 @@ export const MainMenu = ({ items = [] }) => {
               </>
             )}
           </div>
-          
         </div>
       </nav>
 

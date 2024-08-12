@@ -37,6 +37,7 @@ const LoginPage = () => {
       // Generate a random token and save it in local storage
       const token = Math.random().toString(36).substr(2); // Random token
       localStorage.setItem("authToken", token);
+      window.dispatchEvent(new Event('login-status-change')); //to trigger change of auth buttons in MainMenu
       router.push("/"); // Redirect to home page or another protected route
     } else {
       setError(data.message);
@@ -44,13 +45,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-[90vh] bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-xl px-8 pt-4 pb-8 mb-4 bg-white rounded shadow-md"
+        className="w-11/12 max-w-xl px-8 pt-4 pb-8 mb-4 bg-white rounded shadow-md"
       >
         <h1 className="mb-6 text-2xl font-bold text-center text-primary">
-          FMA Members Login
+        FMA Member&#39;s Login
         </h1>
         <div className="mb-4">
           <label
