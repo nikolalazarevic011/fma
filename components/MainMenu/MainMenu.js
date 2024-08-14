@@ -135,7 +135,7 @@ export const MainMenu = ({ items = [] }) => {
             {items.map((item) =>
               item.subMenuItems.length > 0 ? (
                 <Popover key={item.id} className="relative">
-                  {({ open }) => (
+                  {({ open, close }) => (
                     <>
                       <Popover.Button
                         className={classNames(
@@ -144,6 +144,7 @@ export const MainMenu = ({ items = [] }) => {
                             : "text-secondary",
                           "group inline-flex items-center rounded-md text-base font-medium hover:text-menuHighlightBlue focus:outline-none",
                         )}
+                        onClick={() => setOpenSubmenu(null)} // Ensure submenu closes on click
                       >
                         {item.label}
                         <ChevronDownIcon //arrow  for dropdown
@@ -177,7 +178,11 @@ export const MainMenu = ({ items = [] }) => {
                                 >
                                   <a
                                     className={`-m-3 flex items-start rounded-lg p-3 hover:text-menuHighlightBlue ${isActive(subItem.destination) ? "text-menuHighlightBlue" : "text-primary"}`}
-                                    onClick={handleMenuItemClick}
+                                    // onClick={handleMenuItemClick}
+                                    onClick={() => {
+                                      close(); // Close the Popover when an item is clicked
+                                      handleMenuItemClick();
+                                    }}
                                   >
                                     <p className="text-base font-medium">
                                       {subItem.label}
