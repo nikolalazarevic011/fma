@@ -1,4 +1,6 @@
-import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
+import { FaFacebookF, FaYoutube } from "react-icons/fa";
+import { BsTwitterX } from "react-icons/bs";
+import { BiLogoInstagramAlt } from "react-icons/bi";
 
 export default function FooterMenu({ socialLinks }) {
   const { url1, url2, url3, url4 } = socialLinks;
@@ -12,13 +14,13 @@ export default function FooterMenu({ socialLinks }) {
         backgroundPosition: "center",
       }}
     >
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between py-3">
-        <div className="mb-2 flex space-x-4">
+      <div className="flex flex-col items-center justify-between py-3 mx-auto max-w-7xl">
+        <div className="flex mb-2 space-x-4">
           <a href={url1} className="hover:text-secondary" aria-label="Facebook">
             <FaFacebookF />
           </a>
           <a href={url2} className="hover:text-secondary" aria-label="Twitter">
-            <FaTwitter />
+            <BsTwitterX />
           </a>
           <a href={url3} className="hover:text-secondary" aria-label="YouTube">
             <FaYoutube />
@@ -28,7 +30,7 @@ export default function FooterMenu({ socialLinks }) {
             className="hover:text-secondary"
             aria-label="Instagram"
           >
-            <FaInstagram />
+            <BiLogoInstagramAlt  />
           </a>
         </div>
         <p className="text-center">

@@ -11,7 +11,7 @@ export default function Page(props) {
   );
 }
 
-export const getStaticProps = getPageStaticProps;
+export const getStaticProps = getPageStaticProps; //getStaticProps needed when adding getStaticPaths , class 11. 
 
 export const getStaticPaths = async () => {
   const { data } = await client.query({
@@ -34,6 +34,6 @@ export const getStaticPaths = async () => {
           slug: page.uri.substring(1, page.uri.length - 1).split("/"),
         },
       })),
-    fallback: "blocking",
+    fallback: "blocking", // for fetching more than just latest 10 created pages
   };
 };

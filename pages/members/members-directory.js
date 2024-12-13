@@ -4,6 +4,8 @@ import { AcfVideo } from "components/acfVideo";
 import { useEffect, useState } from "react";
 
 const MembersDirectory = () => {
+  // Retrieve the WordPress base URL from environment variables
+  const wpBaseUrl = process.env.NEXT_PUBLIC_WP_URL;
   const [members, setMembers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -36,7 +38,7 @@ const MembersDirectory = () => {
     <div className="">
       {/* Video Component */}
       <AcfVideo
-        src="http://fma.local/wp-content/uploads/2024/07/FMA-1.mov"
+        src={`${wpBaseUrl}/wp-content/uploads/2024/07/FMA-1.mov`}
         poster=""
         controls="0"
         autoplay={true}

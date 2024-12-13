@@ -56,19 +56,20 @@ export const getPageStaticProps = async (context) => {
         }
       }
     `,
-    variables: {  //lection 12 , 22
+    variables: {
+      //lection 12 (Query for page data using GraphQL from page components & getStaticProps) , 22
       uri,
     },
   });
 
   return {
     props: {
+      title: data.nodeByUri.title,
       mainMenuItems: mapMainMenuItems(
         data.acfOptionsMainMenu.mainMenu.menuItems,
       ),
       footerMenuItems: data.acfOptionsFooterMenu.footerMenu,
       blocks: cleanAndTransformBlocks(data.nodeByUri.blocks),
-      title: data.nodeByUri.title
     },
   };
 };

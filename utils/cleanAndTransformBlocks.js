@@ -17,7 +17,7 @@ export const cleanAndTransformBlocks = (blocksJSON) => {
 
   assignId(blocks);
 
-//   console.log("IDS: ", blocks);
+  //   console.log("IDS: ", blocks);
 
   return blocks;
 };

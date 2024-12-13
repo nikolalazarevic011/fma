@@ -1,6 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Bars3Icon, ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  ChevronDownIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export const MobileMenu = ({
@@ -21,10 +25,7 @@ export const MobileMenu = ({
     setOpenSubmenu(openSubmenu === id ? null : id);
   };
 
- 
- 
-
-    const normalizePath = (path) => {
+  const normalizePath = (path) => {
     // Ensure path is a string and remove trailing slash for consistent comparison
     return path ? path.replace(/\/$/, "") : "";
   };
@@ -43,7 +44,6 @@ export const MobileMenu = ({
   };
 
   if (!items.length) return null; // Render nothing if items is empty
-
 
   return (
     <>
