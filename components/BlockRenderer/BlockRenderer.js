@@ -31,7 +31,7 @@ export const BlockRenderer = ({ blocks }) => {
       case "core/group": {
         const { style } = block.attributes;
         const flexClass =
-          block.attributes.layout.orientation === "horizontal"
+          block.attributes?.layout?.orientation === "horizontal"
             ? "flex-row"
             : "flex-col";
 
@@ -154,18 +154,18 @@ export const BlockRenderer = ({ blocks }) => {
         return (
           <Columns
             key={block.id}
-            isStackedOnMobile={block.attributes.isStackedOnMobile}
+            isStackedOnMobile={block.attributes?.isStackedOnMobile}
             textColor={
-              theme[block.attributes.textColor] ||
+              theme[block.attributes?.textColor] ||
               block.attributes.style?.color?.text
             }
             backgroundColor={
-              theme[block.attributes.backgroundColor] ||
+              theme[block.attributes?.backgroundColor] ||
               block.attributes.style?.color?.background
             }
             marginTop={block.attributes.style?.spacing?.margin?.top} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
             marginBottom={block.attributes.style?.spacing?.margin?.bottom} //?! RADI NEGO SI GLEDAO U COLUMn umesto columns
-            verticalAlignment={block.attributes.verticalAlignment}
+            verticalAlignment={block.attributes?.verticalAlignment}
             // spacing={block.attributes.style?.spacing} // kad napravis util klasu da samo paste spacing a ona odradi sve
             borderWidth={block.attributes?.style?.border?.width}
             borderRadius={block.attributes?.style?.border?.radius}
