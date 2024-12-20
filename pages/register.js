@@ -182,16 +182,16 @@ const RegisterPage = () => {
     <div className="flex min-h-[90vh] items-center justify-center bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="mb-4 mt-5 w-11/12 max-w-xl rounded bg-white px-8 pb-8 pt-4 shadow-md"
+        className="w-11/12 max-w-xl px-8 pt-4 pb-8 mt-5 mb-4 bg-white rounded shadow-md"
       >
-        <h1 className="mb-6 text-center text-2xl font-bold text-primary">
+        <h1 className="mb-6 text-2xl font-bold text-center text-primary">
           Register for FMA Membership
         </h1>
         {/* Username */}
         <div className="mb-4">
           <label
             htmlFor="username"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Username (*)
           </label>
@@ -200,7 +200,7 @@ const RegisterPage = () => {
             id="username"
             value={formData.username}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
             required
           />
         </div>
@@ -209,7 +209,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="email"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Email (*)
           </label>
@@ -218,7 +218,7 @@ const RegisterPage = () => {
             id="email"
             value={formData.email}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
             required
           />
         </div>
@@ -227,7 +227,7 @@ const RegisterPage = () => {
         <div className="mb-6">
           <label
             htmlFor="password"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Password (*)
           </label>
@@ -236,7 +236,7 @@ const RegisterPage = () => {
             id="password"
             value={formData.password}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
             required
           />
         </div>
@@ -245,7 +245,7 @@ const RegisterPage = () => {
         <div className="mb-6">
           <label
             htmlFor="confirmPassword"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Confirm Password (*)
           </label>
@@ -254,7 +254,7 @@ const RegisterPage = () => {
             id="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
             required
           />
         </div>
@@ -263,7 +263,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="firstName"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             First Name (*)
           </label>
@@ -272,7 +272,7 @@ const RegisterPage = () => {
             id="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
             required
           />
         </div>
@@ -281,7 +281,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="lastName"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Last Name (*)
           </label>
@@ -290,7 +290,7 @@ const RegisterPage = () => {
             id="lastName"
             value={formData.lastName}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
             required
           />
         </div>
@@ -299,7 +299,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="churchName"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Church Name
           </label>
@@ -308,7 +308,7 @@ const RegisterPage = () => {
             id="churchName"
             value={formData.churchName}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
           />
         </div>
 
@@ -316,7 +316,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="phone"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Phone
           </label>
@@ -325,7 +325,7 @@ const RegisterPage = () => {
             id="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
           />
         </div>
 
@@ -333,7 +333,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="address"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Address
           </label>
@@ -342,7 +342,7 @@ const RegisterPage = () => {
             id="address"
             value={formData.address}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
           />
         </div>
 
@@ -350,7 +350,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="zip"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Zip Code
           </label>
@@ -359,7 +359,7 @@ const RegisterPage = () => {
             id="zip"
             value={formData.zip}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
           />
         </div>
 
@@ -367,7 +367,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="city"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             City
           </label>
@@ -376,7 +376,7 @@ const RegisterPage = () => {
             id="city"
             value={formData.city}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
           />
         </div>
 
@@ -384,7 +384,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="state"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             State (*)
           </label>
@@ -393,7 +393,7 @@ const RegisterPage = () => {
             id="state"
             value={formData.state}
             onChange={handleChange}
-            className="focus:shadow-outline w-full appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none focus:shadow-outline focus:outline-none"
             required
           />
         </div>
@@ -402,7 +402,7 @@ const RegisterPage = () => {
         <div className="mb-4">
           <label
             htmlFor="country"
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="block mb-2 text-sm font-bold text-gray-700"
           >
             Country (*)
           </label>
@@ -410,7 +410,7 @@ const RegisterPage = () => {
             id="country"
             value={formData.country}
             onChange={handleChange}
-            className="focus:shadow-outline w-full cursor-pointer appearance-none rounded border bg-blue-100 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+            className="w-full px-3 py-2 leading-tight text-gray-700 bg-blue-100 border rounded shadow appearance-none cursor-pointer focus:shadow-outline focus:outline-none"
             required
           >
             {countries.map((country) => (
@@ -426,7 +426,7 @@ const RegisterPage = () => {
         <div className="flex items-center">
           <button
             type="submit"
-            className="focus:shadow-outline rounded bg-primary px-4 py-2 font-bold text-white focus:outline-none"
+            className="px-4 py-2 font-bold text-white rounded focus:shadow-outline bg-primary focus:outline-none"
           >
             Register
           </button>

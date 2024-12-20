@@ -9,6 +9,7 @@ export const getPageStaticProps = async (context) => {
   //we can get uri/url
   //! gledamo dal ima slug, ako nema znaci da je home page
   const uri = context.params?.slug ? `/${context.params.slug.join("/")}/` : "/";
+  console.log("Fetching data for URI:", uri);
 
   const { data } = await client.query({
     query: gql`
@@ -61,6 +62,13 @@ export const getPageStaticProps = async (context) => {
       uri,
     },
   });
+
+  if (!data || !data.nodeByUri) {
+    console.error("No data found for URI:", uri);
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

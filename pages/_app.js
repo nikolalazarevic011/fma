@@ -99,23 +99,23 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-MyApp.getInitialProps = async ({ ctx, Component }) => {
-  let pageProps = {};
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
-  }
+// MyApp.getInitialProps = async ({ ctx, Component }) => {
+//   let pageProps = {};
+//   if (Component.getInitialProps) {
+//     pageProps = await Component.getInitialProps(ctx);
+//   }
 
-  try {
-    const { props } = await getPageStaticProps({ params: { slug: [] } }); // Use utility function here
-    pageProps.mainMenuItems = props.mainMenuItems;
-    pageProps.footerMenuItems = props.footerMenuItems;
-  } catch (error) {
-    console.error("Error fetching menu data:", error);
-    pageProps.mainMenuItems = [];
-    pageProps.footerMenuItems = [];
-  }
+//   try {
+//     const { props } = await getPageStaticProps({ params: { slug: [] } }); // Use utility function here
+//     pageProps.mainMenuItems = props.mainMenuItems;
+//     pageProps.footerMenuItems = props.footerMenuItems;
+//   } catch (error) {
+//     console.error("Error fetching menu data:", error);
+//     pageProps.mainMenuItems = [];
+//     pageProps.footerMenuItems = [];
+//   }
 
-  return { pageProps };
-};
+//   return { pageProps };
+// };
 
 export default MyApp;

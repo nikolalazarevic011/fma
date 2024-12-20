@@ -8,6 +8,7 @@ function classNames(...classes) {
 }
 
 export const DesktopMenu = ({ items, isLoggedIn, handleLogout, router }) => {
+  
   const isActive = (path) => {
     if (!path) return false;
     const currentPath = router.asPath.replace(/\/$/, "");
