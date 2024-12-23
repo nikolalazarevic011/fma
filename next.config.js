@@ -20,10 +20,9 @@ const nextConfig = {
   },
 };
 
-// Conditionally apply settings for production
+// // Conditionally apply settings for production
 if (process.env.NODE_ENV === "production") {
   nextConfig.output = "export"; // Enable static export only in production
-  nextConfig.basePath = "/next"; // Set base path for production
 }
 
 module.exports = nextConfig;
