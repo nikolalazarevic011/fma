@@ -16,53 +16,57 @@ function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
 
-  // // Redirect logged-in users away from /login and /register
-  // useEffect(() => {
-  //   const handleRedirectIfLoggedIn = () => {
-  //     const user = localStorage.getItem("user");
+  // Redirect logged-in users away from /login and /register
 
-  //     if (
-  //       user &&
-  //       (router.pathname === "/login" || router.pathname === "/register")
-  //     ) {
-  //       router.push("/"); // Redirect to homepage if logged in
-  //     }
-  //   };
+  useEffect(() => {
+    const handleRedirectIfLoggedIn = () => {
+      const user = localStorage.getItem("user");
 
-  //   handleRedirectIfLoggedIn();
+      if (
+        user &&
+        (router.pathname === "/login" || router.pathname === "/register")
+      ) {
+        router.push("/"); // Redirect to homepage if logged in
+      }
+    };
 
-  //   // Also listen for route changes
-  //   router.events.on("routeChangeComplete", handleRedirectIfLoggedIn);
+    handleRedirectIfLoggedIn();
 
-  //   // Cleanup the event listener
-  //   return () => {
-  //     router.events.off("routeChangeComplete", handleRedirectIfLoggedIn);
-  //   };
-  // }, [router]);
+    // Also listen for route changes
+    router.events.on("routeChangeComplete", handleRedirectIfLoggedIn);
 
-  //route protection for users without paid membership
-  // useEffect(() => {
-  //   const handleRouteChangeStart = (url) => {
-  //     const user = localStorage.getItem("user");
-  //     const membershipId = localStorage.getItem("membershipId");
+    // Cleanup the event listener
+    return () => {
+      router.events.off("routeChangeComplete", handleRedirectIfLoggedIn);
+    };
+  }, [router]);
 
-  //     // Check if the route starts with /members and the user is not allowed
-  //     if (url.startsWith("/members") && membershipId !== "2") {
-  //       // Redirect to /applications/join-fma
-  //       router.push("/applications/join-fma");
-  //     }
-  //   };
+  // route protection for users without paid membership
+  useEffect(() => {
+    const handleRouteChangeStart = (url) => {
+      const user = localStorage.getItem("user");
+      const membershipId = localStorage.getItem("membershipId");
 
-  //   // Add event listener for route changes
-  //   router.events.on("routeChangeStart", handleRouteChangeStart);
+      // Check if the route starts with /members and the user is not allowed
+      if (url.startsWith("/members") && membershipId !== "2") {
+        // Redirect to /applications/join-fma
+        router.push("/applications/join-fma");
+      }
+    };
 
-  //   // Clean up the event listener on component unmount
-  //   return () => {
-  //     router.events.off("routeChangeStart", handleRouteChangeStart);
-  //   };
-  // }, [router]);
+    // Add event listener for route changes
+    router.events.on("routeChangeStart", handleRouteChangeStart);
 
-  // // Fetch menu data on route change
+    // Clean up the event listener on component unmount
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+    };
+  }, [router]);
+
+
+  //----------------------------------------------------------------
+  // Fetch menu data on route change
+
   // useEffect(() => {
   //   const handleRouteChangeComplete = async () => {
   //     try {
@@ -88,6 +92,8 @@ function MyApp({ Component, pageProps }) {
   //     router.events.off("routeChangeComplete", handleRouteChangeComplete);
   //   };
   // }, [router, menuData.mainMenuItems.length, menuData.footerMenuItems.length]);
+  
+  //----------------------------------------------------------------
 
   return (
     <Layout
@@ -99,23 +105,5 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-// MyApp.getInitialProps = async ({ ctx, Component }) => {
-//   let pageProps = {};
-//   if (Component.getInitialProps) {
-//     pageProps = await Component.getInitialProps(ctx);
-//   }
-
-//   try {
-//     const { props } = await getPageStaticProps({ params: { slug: [] } }); // Use utility function here
-//     pageProps.mainMenuItems = props.mainMenuItems;
-//     pageProps.footerMenuItems = props.footerMenuItems;
-//   } catch (error) {
-//     console.error("Error fetching menu data:", error);
-//     pageProps.mainMenuItems = [];
-//     pageProps.footerMenuItems = [];
-//   }
-
-//   return { pageProps };
-// };
 
 export default MyApp;
