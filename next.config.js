@@ -2,13 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [process.env.WP_IMAGES_URL],
+    unoptimized: true, // Disable image optimization for static export
   },
   experimental: {
     scrollRestoration: true,
   },
-  basePath: '/frontend', // Add this line
-  trailingSlash: true,    // Ensure trailing slashes for static export
+  basePath: '/frontend', // Base path for serving files under /frontend
+  trailingSlash: true,   // Ensures all routes include a trailing slash
+  output: 'export',      // Use static export
 };
 
 module.exports = nextConfig;
