@@ -35,4 +35,4 @@ yarn-error.log*
 next-env.d.ts
 .next.zip
 node_modules.zip
-
+out.zip
