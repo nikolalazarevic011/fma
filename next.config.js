@@ -7,7 +7,8 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
-  output: "export", // Add this line for static export
+  basePath: '/frontend', // Add this line
+  trailingSlash: true,    // Ensure trailing slashes for static export
 };
 
 module.exports = nextConfig;
