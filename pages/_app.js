@@ -63,36 +63,35 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-
   //----------------------------------------------------------------
   // Fetch menu data on route change
 
-  // useEffect(() => {
-  //   const handleRouteChangeComplete = async () => {
-  //     try {
-  //       const { props } = await getPageStaticProps({ params: { slug: [] } });
-  //       setMenuData({
-  //         mainMenuItems: props.mainMenuItems,
-  //         footerMenuItems: props.footerMenuItems,
-  //       });
-  //     } catch (error) {
-  //       console.error("Error fetching menu data:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleRouteChangeComplete = async () => {
+      try {
+        const { props } = await getPageStaticProps({ params: { slug: [] } });
+        setMenuData({
+          mainMenuItems: props.mainMenuItems,
+          footerMenuItems: props.footerMenuItems,
+        });
+      } catch (error) {
+        console.error("Error fetching menu data:", error);
+      }
+    };
 
-  //   // Fetch on route change
-  //   router.events.on("routeChangeComplete", handleRouteChangeComplete);
+    // Fetch on route change
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
 
-  //   // Fetch immediately if the data is empty
-  //   if (!menuData.mainMenuItems.length || !menuData.footerMenuItems.length) {
-  //     handleRouteChangeComplete();
-  //   }
+    // Fetch immediately if the data is empty
+    if (!menuData.mainMenuItems.length || !menuData.footerMenuItems.length) {
+      handleRouteChangeComplete();
+    }
 
-  //   return () => {
-  //     router.events.off("routeChangeComplete", handleRouteChangeComplete);
-  //   };
-  // }, [router, menuData.mainMenuItems.length, menuData.footerMenuItems.length]);
-  
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+    };
+  }, [router, menuData.mainMenuItems.length, menuData.footerMenuItems.length]);
+
   //----------------------------------------------------------------
 
   return (
@@ -104,6 +103,5 @@ function MyApp({ Component, pageProps }) {
     </Layout>
   );
 }
-
 
 export default MyApp;
