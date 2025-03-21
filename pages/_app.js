@@ -47,8 +47,12 @@ function MyApp({ Component, pageProps }) {
       const user = localStorage.getItem("user");
       const membershipId = localStorage.getItem("membershipId");
 
+      // Determine required membership ID based on environment
+      const requiredMembershipId =
+        process.env.NODE_ENV === "development" ? "2" : "1"; // in dev 2 is paid, in prod 1 is paid ( because the old programmer put it that way in OG FMA site )
+
       // Check if the route starts with /members and the user is not allowed
-      if (url.startsWith("/members") && membershipId !== "2") {
+      if (url.startsWith("/members") && membershipId !== requiredMembershipId) {
         // Redirect to /applications/join-fma
         router.push("/applications/join-fma");
       }
