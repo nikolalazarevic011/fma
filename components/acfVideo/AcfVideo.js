@@ -116,7 +116,7 @@ AcfVideo.propTypes = {
   src: PropTypes.string.isRequired,
   poster: PropTypes.string,
   controls: PropTypes.string,
-  autoplay: PropTypes.bool,
+  autoplay: PropTypes.string,
   loop: PropTypes.bool,
   className: PropTypes.string,
   heightProp: PropTypes.string,
