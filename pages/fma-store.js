@@ -1,4 +1,26 @@
-import Script from "next/script";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
+const FmaStore = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Open the store in a new tab
+    window.open("https://faith-ministries-alliance-store.company.site/", "_blank");
+
+    // Redirect back to home or another page after opening the new tab
+    router.replace("/");
+  }, [router]);
+
+  return null; // This prevents rendering any unnecessary UI
+};
+
+export default FmaStore;
+
+
+
+//!OLD VERSION - like iframe-to show inside the site- was buggy
+/* import Script from "next/script";
 import { useEffect } from "react";
 
 const FmaStore = () => {
@@ -47,3 +69,5 @@ const FmaStore = () => {
 };
 
 export default FmaStore;
+ */
+

@@ -185,7 +185,7 @@ const RegisterPage = () => {
         className="w-11/12 max-w-xl px-8 pt-4 pb-8 mt-5 mb-4 bg-white rounded shadow-md"
       >
         <h1 className="mb-6 text-2xl font-bold text-center text-primary">
-          Register for FMA Membership
+          Register for FMA
         </h1>
         {/* Username */}
         <div className="mb-4">
