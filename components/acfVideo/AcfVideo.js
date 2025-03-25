@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { useIsMobile } from "utils/useIsMobile";
 
 export const AcfVideo = ({
   src,
   poster,
   controls,
-  autoplay = true,
+  autoplay,
   loop = true,
   className = "",
   muted = true,
@@ -23,7 +23,8 @@ export const AcfVideo = ({
 
   // Helper function to extract YouTube video ID from URL
   const extractVideoID = (url) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
     return match && match[2].length === 11 ? match[2] : null;
   };
@@ -41,8 +42,8 @@ export const AcfVideo = ({
 
   const styles = {
     height: responsiveHeight,
-    objectFit: 'cover',
-    width: '100%',
+    objectFit: "cover",
+    width: "100%",
   };
 
   // Convert string "1" or "0" to boolean
@@ -52,9 +53,9 @@ export const AcfVideo = ({
   useEffect(() => {
     if (videoRef.current && isMobile) {
       const video = videoRef.current;
-      
+
       // Prevent full-screen on mobile
-      video.addEventListener('webkitfullscreenchange', (e) => {
+      video.addEventListener("webkitfullscreenchange", (e) => {
         e.preventDefault();
         if (document.webkitFullscreenElement) {
           document.webkitCancelFullScreen();
@@ -62,8 +63,8 @@ export const AcfVideo = ({
       });
 
       // Autoplay and loop
-      video.play().catch(error => {
-        console.log('Autoplay was prevented', error);
+      video.play().catch((error) => {
+        console.log("Autoplay was prevented", error);
       });
     }
   }, [isMobile]);
@@ -72,7 +73,7 @@ export const AcfVideo = ({
   const renderVideoContent = () => {
     if (embed) {
       const videoId = extractVideoID(src);
-      const iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=${autoplay ? "1" : "0"}&loop=${loop ? "1" : "0"}&playlist=${videoId}&playsinline=1`;
+      const iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=${autoplay === "1" ? "1" : "0"}&loop=${loop ? "1" : "0"}&playlist=${videoId}&playsinline=1`;
       return (
         <iframe
           src={iframeSrc}
@@ -89,14 +90,14 @@ export const AcfVideo = ({
           ref={videoRef}
           src={src}
           poster={poster}
-          controls={ showControls() }
+          controls={showControls()}
           autoPlay={showAutoplay()}
           loop={loop}
           muted={muted}
           playsInline
           disablePictureInPicture
           style={styles}
-          className={`object-cover w-full h-full mx-auto ${className}`}
+          className={`mx-auto h-full w-full object-cover ${className}`}
           {...props}
         >
           Your browser does not support the video tag.
@@ -110,15 +111,4 @@ export const AcfVideo = ({
       {renderVideoContent()}
     </div>
   ) : null;
-};
-
-AcfVideo.propTypes = {
-  src: PropTypes.string.isRequired,
-  poster: PropTypes.string,
-  controls: PropTypes.string,
-  autoplay: PropTypes.string,
-  loop: PropTypes.bool,
-  className: PropTypes.string,
-  heightProp: PropTypes.string,
-  isEmbed: PropTypes.string,
 };

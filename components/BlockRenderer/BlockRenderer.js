@@ -252,6 +252,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/acfvideo": {
+        // console.log("acf video block:", block);
         return (
           <AcfVideo
             key={block.id}
@@ -264,7 +265,7 @@ export const BlockRenderer = ({ blocks }) => {
         );
       }
       case "acf/acfslider": {
-        console.log(block.attributes.data);
+        // console.log(block.attributes.data);
         return <AcfSlider key={block.id} images={block.attributes.data} />;
       }
       default: {

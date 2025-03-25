@@ -19,7 +19,7 @@ export const Gallery = ({ columns, cropImages, items }) => {
   };
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-wrap">
+    <div className="flex flex-wrap mx-auto max-w-7xl">
       {items.map((item, index) => (
         <div
           key={item.id}
@@ -27,7 +27,7 @@ export const Gallery = ({ columns, cropImages, items }) => {
             width: columnWidth,
             minHeight: !isMobile ? "450px" : "300px",
           }} // Added min-height here
-          className="w-full cursor-pointer p-1"
+          className="w-full p-1 cursor-pointer"
           onClick={() => handleImageClick(index)}
         >
           <div className="relative h-full">
@@ -39,7 +39,7 @@ export const Gallery = ({ columns, cropImages, items }) => {
               className={cropImages ? "object-cover" : "h-auto w-full"}
               priority={false}
             />
-            <div className="absolute inset-0 bg-black bg-opacity-0 transition duration-300 ease-in-out hover:bg-opacity-50"></div>
+            <div className="absolute inset-0 transition duration-300 ease-in-out bg-black bg-opacity-0 hover:bg-opacity-50"></div>
           </div>
         </div>
       ))}
