@@ -65,7 +65,7 @@ export default function ResetPasswordPage() {
           const token = Math.random().toString(36).substr(2); // Random token
           localStorage.setItem("authToken", token);
           window.dispatchEvent(new Event("login-status-change")); //to trigger change of auth buttons in MainMenu
-          router.push("/"); // Redirect to home page or another protected route
+          router.push("/").then(() => window.location.reload());
         } else {
           setMessage("Password changed but auto-login failed.");
         }

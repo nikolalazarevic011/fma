@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const LoginPage = () => {
   const [login, setLogin] = useState("");
@@ -99,9 +100,9 @@ const LoginPage = () => {
           </button>
         </div>
         <div className="mt-4 text-center">
-          <a href="#" className="text-sm text-blue-600 hover:underline">
+          <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
             Lost your Password?
-          </a>
+          </Link>
         </div>
       </form>
     </div>
