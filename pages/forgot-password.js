@@ -19,7 +19,7 @@ export default function ForgotPassword() {
 
       const data = await response.json();
       if (response.ok) {
-        setMessage('✅ Check your email for the reset link.');
+        setMessage('✅ Check your email (spam folder as well) for the reset link.');
       } else {
         setMessage(data.error || '❌ Something went wrong');
       }
