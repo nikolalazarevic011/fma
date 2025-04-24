@@ -13,6 +13,7 @@ export const Cover = ({
   id,
   borderBottomWidth,
   bottomBorderColor,
+  fullWidth = false,
 }) => {
   const color = getOverlayColor(overlay) || "transparent";
   const isMobile = useIsMobile();
@@ -62,7 +63,7 @@ export const Cover = ({
           opacity: opacity,
         }}
       ></div>
-      <div className="z-10 max-w-7xl">{children}</div>
+      <div className={`z-10 ${fullWidth ? "w-full" : "mx-auto max-w-7xl"}`}>{children}</div>
     </div>
   );
 };

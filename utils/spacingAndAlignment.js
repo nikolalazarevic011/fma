@@ -56,7 +56,7 @@ export const getMarginBottomClass = (marginBottom) => {
   const marginMap = {
     "-5": "-mb-5", // if passing  - rem value
     "-2": "-mb-8",
-    "-1": "-mb-1",
+    "-1": "-mb-2",
     "0rem": "", // No margin
     "0.25rem": "mb-1", // 4px
     "0.5rem": "mb-2", // 8px
@@ -79,5 +79,39 @@ export const getMarginBottomClass = (marginBottom) => {
   };
 
   return `${marginMap[marginBottom] || ""}`;
+};
+
+export const getHorizontalGapStyle = (blockGap) => {
+  if (!blockGap || typeof blockGap !== "string") return {};
+
+  // "var:preset|spacing|40" → extract number if pattern matches
+  const match = blockGap.match(/var:preset\|spacing\|(\d+)/);
+  if (match) {
+    const spacingValue = match[1];
+    return { gap: `${spacingValue}px` }; // or `columnGap` if more precise
+  }
+
+  // fallback if it's a raw value like "2rem" or "20px"
+  if (blockGap.endsWith("rem") || blockGap.endsWith("px")) {
+    return { gap: blockGap };
+  }
+  return {};
+};
+
+export const getVerticalGapStyle = (gapValue) => {
+  if (!gapValue || typeof gapValue !== "string") return {};
+
+  // Match pattern like var:preset|spacing|40 → "40" (could also be rem/px)
+  const match = gapValue.match(/var:preset\|spacing\|(\d+)/);
+  if (match) {
+    return { rowGap: `${match[1]}px` };
+  }
+
+  // Raw value like "2rem" or "20px"
+  if (gapValue.endsWith("rem") || gapValue.endsWith("px")) {
+    return { rowGap: gapValue };
+  }
+
+  return {};
 };
 

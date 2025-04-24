@@ -56,8 +56,8 @@ export const BlockRenderer = ({ blocks }) => {
           <div className="" key={block.id}>
             <Image
               src={block.attributes.url}
-              height={block.attributes.height}
-              width={block.attributes.width}
+              height={block.attributes.height || 'auto'}
+              width={block.attributes.width || 'auto'}
               alt={block.attributes.alt || ""}
               priority
             />
@@ -121,6 +121,7 @@ export const BlockRenderer = ({ blocks }) => {
             hasParallax={block.attributes.hasParallax}
             borderBottomWidth={block.attributes.style?.border?.bottom?.width}
             bottomBorderColor={block.attributes.style?.border?.bottom?.color}
+            fullWidth={block.attributes?.width == 1500 && block.attributes?.height ==700}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Cover>
@@ -171,6 +172,8 @@ export const BlockRenderer = ({ blocks }) => {
             borderRadius={block.attributes?.style?.border?.radius}
             borderColor={block.attributes?.borderColor}
             minHeight={block.attributes?.style?.spacing?.blockGap?.top} //double check
+            horizontalGap={block.attributes?.style?.spacing?.blockGap?.left} 
+            verticalGap={block.attributes?.style?.spacing?.blockGap?.top} 
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Columns>
@@ -203,6 +206,8 @@ export const BlockRenderer = ({ blocks }) => {
             borderBottomColor={block.attributes.style?.border?.bottom?.color}
             minHeight={block.attributes?.style?.spacing?.blockGap}
             shadow={block.attributes?.style?.shadow}
+            borderRadius={block.attributes?.style?.border?.radius}
+            isHidden={block.attributes?.className == 'hide'}
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Column>

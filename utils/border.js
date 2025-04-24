@@ -90,6 +90,7 @@
     const borderRadiusMap = {
       'none': 'rounded-none',
       'sm': 'rounded-sm',
+      '5px': 'rounded-md',
       '6px': 'rounded-md',
       'lg': 'rounded-lg',
       'xl': 'rounded-xl',

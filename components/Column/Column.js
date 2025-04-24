@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getBorderColorClass, getBorderBottomWidthClass } from "utils/border";
+import {
+  getBorderColorClass,
+  getBorderBottomWidthClass,
+  getBorderRadiusClass,
+} from "utils/border";
 import { useIsMobile } from "utils/useIsMobile";
 
 export const Column = ({
@@ -12,14 +16,19 @@ export const Column = ({
   borderBottomColor,
   minHeight,
   shadow,
+  borderRadius,
+  isHidden,
 }) => {
   const isMobile = useIsMobile();
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
   const widthStyle = width
-    ? { minWidth: width, flexGrow: 1 }
+    ? { width: width, flexGrow: 1 }
     : { flexGrow: 1, flexBasis: 0 };
   const minHeightStyle = !isMobile && minHeight ? { minHeight } : {};
+  
+  if (isHidden) return null;
+
   return (
     <div
       style={{
@@ -28,7 +37,7 @@ export const Column = ({
         ...backgroundColorStyle,
         ...minHeightStyle,
       }}
-      className={`col px-2 py-2 sm:py-2 ${getBorderBottomWidthClass(borderBottom)} ${getBorderColorClass(borderBottomColor)} `}
+      className={`col px-2 py-2 sm:py-2 ${getBorderBottomWidthClass(borderBottom)} ${getBorderColorClass(borderBottomColor)} ${getBorderRadiusClass(borderRadius)} `}
     >
       {children}
     </div>
@@ -42,4 +51,5 @@ Column.propTypes = {
   backgroundColor: PropTypes.string,
   borderBottom: PropTypes.string,
   borderBottomColor: PropTypes.string,
+  isHidden: PropTypes.bool,
 };

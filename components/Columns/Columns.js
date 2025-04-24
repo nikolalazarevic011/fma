@@ -1,7 +1,9 @@
 import { useIsMobile } from "utils/useIsMobile";
 import {
   getAlignmentClass,
+  getHorizontalGapStyle,
   getMarginTopClass,
+  getVerticalGapStyle,
 } from "utils/spacingAndAlignment";
 import {
   getBorderColorClass,
@@ -21,13 +23,19 @@ export const Columns = ({
   borderRadius,
   borderColor,
   minHeight,
+  horizontalGap,
+  verticalGap,
 }) => {
   const isMobile = useIsMobile();
   const textColorStyle = textColor ? { color: textColor } : {};
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {};
-  const marginTopClass = !isMobile && marginTop ? { marginTop } : "";
+  const marginTopClass =  marginTop ? { marginTop } : "";
+  // const marginTopClass = { marginTop } ;
   const marginBottomClass = !isMobile && marginBottom ? { marginBottom } : "";
   const minHeightStyle = minHeight ? { minHeight } : {};
+  const horizontalGapStyle = getHorizontalGapStyle(horizontalGap); // Get the block gap style
+  // const verticalGapStyle = getVerticalGapStyle(verticalGap);
+
   return (
     <div
       style={{
@@ -41,8 +49,10 @@ export const Columns = ({
     >
       <div
         className={`cols mx-auto max-w-6xl ${getBorderRadiusClass(borderRadius)} ${
-          isStackedOnMobile ? "block md:flex" : "flex"
+          isStackedOnMobile ? "flex flex-col md:flex-row justify-center items-center" : "flex justify-center items-center"
         } ${verticalAlignment ? getAlignmentClass(verticalAlignment) : ""} ${!isMobile && getBorderWidthClass(borderWidth)} ${getBorderColorClass(borderColor)} `}
+        // style={{ ...horizontalGapStyle, ...verticalGapStyle }}
+        style={{ ...horizontalGapStyle }}
       >
         {children}
       </div>
