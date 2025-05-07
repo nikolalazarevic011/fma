@@ -11,6 +11,7 @@ const FmaStore = () => {
     if (isMobile) {
       // Open in same tab
       window.location.href = storeUrl;
+      router.replace("/");
     } else {
       // Open in new tab
       window.open(storeUrl, "_blank");
