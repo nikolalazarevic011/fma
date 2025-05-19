@@ -74,7 +74,7 @@ const FmaStore = () => {
   }, [router.asPath, router.events]);
 
   return (
-    <div className="my-5">
+    <div className="max-w-6xl mx-auto my-5">
       <div id={`my-store-${storeId}`}></div>
     </div>
   );
