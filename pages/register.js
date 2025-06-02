@@ -1,58 +1,8 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-const RegisterPage = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-    email: "",
-    firstName: "",
-    lastName: "",
-    churchName: "",
-    phone: "",
-    address: "",
-    zip: "",
-    city: "",
-    state: "",
-    country: "", // This will be populated by the dropdown
-  });
 
-  const [error, setError] = useState(null);
-  const router = useRouter();
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [id]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match!");
-      return;
-    }
-
-    const res = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      router.push("/login");
-    } else {
-      setError(data.message);
-    }
-  };
-
-  const countries = [
+export const countries = [
     "Please select a country",
     "United States",
     "Afghanistan",
@@ -177,6 +127,59 @@ const RegisterPage = () => {
     "Lithuania",
     "Luxembourg",
   ];
+
+const RegisterPage = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    churchName: "",
+    phone: "",
+    address: "",
+    zip: "",
+    city: "",
+    state: "",
+    country: "", // This will be populated by the dropdown
+  });
+
+  const [error, setError] = useState(null);
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [id]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      router.push("/login");
+    } else {
+      setError(data.message);
+    }
+  };
+
+  
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center bg-gray-100">

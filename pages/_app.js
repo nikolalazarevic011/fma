@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         user &&
         (router.pathname === "/login" || router.pathname === "/register")
       ) {
-        router.push("/").then(() => window.location.reload());; // Redirect to homepage if logged in. and refresh to refetch main menus
+        router.push("/").then(() => window.location.reload()); // Redirect to homepage if logged in. and refresh to refetch main menus
       }
     };
 
@@ -47,8 +47,7 @@ function MyApp({ Component, pageProps }) {
       const membershipId = localStorage.getItem("membershipId");
 
       // Determine required membership ID based on environment
-      const requiredMembershipId =
-        process.env.NODE_ENV === "development" ? "2" : "1"; // in dev 2 is paid, in prod 1 is paid ( because the old programmer put it that way in OG FMA site )
+      const requiredMembershipId = "1";
 
       // Check if the route starts with /members and the user is not allowed
       if (url.startsWith("/members") && membershipId !== requiredMembershipId) {
@@ -65,7 +64,6 @@ function MyApp({ Component, pageProps }) {
       router.events.off("routeChangeStart", handleRouteChangeStart);
     };
   }, [router]);
-
 
   return (
     <Layout
