@@ -10,6 +10,8 @@ const MembersDirectory = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const membersPerPage = 100;
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -19,6 +21,7 @@ const MembersDirectory = () => {
         const data = await res.json();
 
         if (res.ok) {
+          console.log("Members data received:", data); // **Debug log**
           setMembers(data);
         } else {
           console.error("API Error:", data.message);
@@ -35,7 +38,7 @@ const MembersDirectory = () => {
     fetchMembers();
   }, []);
 
-  // **Fixed filtering with null checks**
+  // **filtering with null checks**
   const filteredMembers = members.filter((member) => {
     const name = member.name || "";
     const church = member.church || "";
@@ -47,6 +50,56 @@ const MembersDirectory = () => {
       city.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
+
+  // **Pagination calculations**
+  const totalPages = Math.ceil(filteredMembers.length / membersPerPage);
+  const startIndex = (currentPage - 1) * membersPerPage;
+  const endIndex = startIndex + membersPerPage;
+  const currentMembers = filteredMembers.slice(startIndex, endIndex);
+
+  // **Reset to first page when search changes**
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  // **Pagination handlers**
+  const goToPage = (page) => {
+    setCurrentPage(page);
+    // Scroll to top when changing pages
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const goToPrevPage = () => {
+    if (currentPage > 1) {
+      goToPage(currentPage - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      goToPage(currentPage + 1);
+    }
+  };
+
+  // **Generate page numbers for pagination**
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    // Adjust start page if we're near the end
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return pageNumbers;
+  };
 
   if (loading) {
     return (
@@ -98,11 +151,42 @@ const MembersDirectory = () => {
         />
       </div>
 
+      {/* **Members Count and Pagination Info** */}
+      <div className="mb-6 text-center">
+        <p className="text-gray-600">
+          Showing {currentMembers.length} of {filteredMembers.length} members
+          {searchTerm && ` (filtered from ${members.length} total)`}
+        </p>
+        {totalPages > 1 && (
+          <p className="mt-1 text-sm text-gray-500">
+            Page {currentPage} of {totalPages}
+          </p>
+        )}
+      </div>
+
+      {/* **Debug Info - Only in Development** */}
+      {process.env.NODE_ENV === "development" && members.length > 0 && (
+        <div className="max-w-4xl p-4 mx-auto mb-4 bg-gray-100 rounded">
+          <p>
+            <strong>Total Members:</strong> {members.length}
+          </p>
+          <p>
+            <strong>Sample Member Data:</strong>
+          </p>
+          <pre className="p-2 mt-2 overflow-auto text-xs bg-white rounded">
+            {JSON.stringify(members[0], null, 2)}
+          </pre>
+        </div>
+      )}
+
       {/* Members List */}
-      <div className="container grid grid-cols-1 gap-8 mx-auto sm:grid-cols-2 lg:grid-cols-4">
-        {filteredMembers.length > 0 ? (
-          filteredMembers.map((member, index) => (
-            <div key={index} className="p-6 bg-white rounded-lg shadow-md">
+      <div className="container grid grid-cols-1 gap-8 mx-auto mb-8 sm:grid-cols-2 lg:grid-cols-4">
+        {currentMembers.length > 0 ? (
+          currentMembers.map((member, index) => (
+            <div
+              key={startIndex + index}
+              className="p-6 bg-white rounded-lg shadow-md"
+            >
               <h2 className="mb-2 text-xl font-bold text-primary">
                 {member.name || "No Name"}
               </h2>
@@ -133,6 +217,101 @@ const MembersDirectory = () => {
           </div>
         )}
       </div>
+
+      {/* **Pagination Controls** */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center mb-8 space-x-2">
+          {/* Previous Button */}
+          <button
+            onClick={goToPrevPage}
+            disabled={currentPage === 1}
+            className={`rounded-lg px-4 py-2 font-medium ${
+              currentPage === 1
+                ? "cursor-not-allowed bg-gray-200 text-gray-400"
+                : "bg-primary text-white hover:bg-primaryDark"
+            }`}
+          >
+            Previous
+          </button>
+
+          {/* First Page */}
+          {currentPage > 3 && (
+            <>
+              <button
+                onClick={() => goToPage(1)}
+                className="px-3 py-2 font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300"
+              >
+                1
+              </button>
+              {currentPage > 4 && <span className="text-gray-500">...</span>}
+            </>
+          )}
+
+          {/* Page Numbers */}
+          {getPageNumbers().map((pageNum) => (
+            <button
+              key={pageNum}
+              onClick={() => goToPage(pageNum)}
+              className={`rounded-lg px-3 py-2 font-medium ${
+                pageNum === currentPage
+                  ? "bg-primary text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              {pageNum}
+            </button>
+          ))}
+
+          {/* Last Page */}
+          {currentPage < totalPages - 2 && (
+            <>
+              {currentPage < totalPages - 3 && (
+                <span className="text-gray-500">...</span>
+              )}
+              <button
+                onClick={() => goToPage(totalPages)}
+                className="px-3 py-2 font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300"
+              >
+                {totalPages}
+              </button>
+            </>
+          )}
+
+          {/* Next Button */}
+          <button
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages}
+            className={`rounded-lg px-4 py-2 font-medium ${
+              currentPage === totalPages
+                ? "cursor-not-allowed bg-gray-200 text-gray-400"
+                : "bg-primary text-white hover:bg-primaryDark"
+            }`}
+          >
+            Next
+          </button>
+        </div>
+      )}
+
+      {/* **Go to Page Input** */}
+      {totalPages > 5 && (
+        <div className="flex items-center justify-center mb-8 space-x-2">
+          <span className="text-gray-600">Go to page:</span>
+          <input
+            type="number"
+            min="1"
+            max={totalPages}
+            value={currentPage}
+            onChange={(e) => {
+              const page = parseInt(e.target.value);
+              if (page >= 1 && page <= totalPages) {
+                goToPage(page);
+              }
+            }}
+            className="w-16 px-2 py-1 text-center border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+          <span className="text-gray-600">of {totalPages}</span>
+        </div>
+      )}
     </div>
   );
 };
