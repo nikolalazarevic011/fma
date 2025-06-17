@@ -65,6 +65,43 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
+  // Force refresh for contact page with iframe issues
+  useEffect(() => {
+    const handleContactPageRefresh = (url) => {
+      // Check if we're navigating to the contact-us page
+      if (url === "/contact-us") {
+        const hasVisitedContact = sessionStorage.getItem("hasVisitedContactUs");
+
+        // If this is the first time visiting contact-us in this session
+        if (!hasVisitedContact) {
+          // Mark that we've visited it
+          sessionStorage.setItem("hasVisitedContactUs", "true");
+
+          // Refresh the page to ensure iframe loads properly
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
+        }
+      }
+    };
+
+    // Listen for route changes
+    router.events.on("routeChangeComplete", handleContactPageRefresh);
+
+    // Also check if we're already on contact page when app loads
+    if (router.isReady && router.asPath === "/contact-us") {
+      const hasVisitedContact = sessionStorage.getItem("hasVisitedContactUs");
+      if (!hasVisitedContact) {
+        sessionStorage.setItem("hasVisitedContactUs", "true");
+        window.location.reload();
+      }
+    }
+
+    return () => {
+      router.events.off("routeChangeComplete", handleContactPageRefresh);
+    };
+  }, [router]);
+
   return (
     <Layout
       mainMenuItems={menuData.mainMenuItems}

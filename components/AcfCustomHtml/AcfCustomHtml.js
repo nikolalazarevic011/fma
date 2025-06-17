@@ -17,7 +17,7 @@ export const AcfCustomHtml = ({ customHtml }) => {
   }, []);
 
   return (
-    <div ref={iframeRef} className="p-4 overflow-auto rounded-lg shadow-lg" style={{ minHeight: '500px' }}>
+    <div ref={iframeRef} className="overflow-auto rounded-lg shadow-lg " style={{ minHeight: '500px' }}>
       <div dangerouslySetInnerHTML={{ __html: customHtml }} />
     </div>
   );
